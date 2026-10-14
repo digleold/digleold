@@ -30,3 +30,16 @@ I testi, i loghi e i contatti provengono da ldtechnologies.it e ldrobotics.it
 
 Il modulo in `contatti.html` apre il programma di posta con il messaggio compilato
 (`mailto:`); per un invio diretto va collegato a un servizio di form.
+
+## Pubblicazione su GitHub Pages
+
+Il workflow `.github/workflows/pages.yml` pubblica la cartella `NuovoSitoLD` ad ogni push
+sul branch predefinito. Attivazione una tantum: Settings > Pages > Source: **GitHub Actions**.
+Il sito sarà su `https://digleold.github.io/digleold/`. Tutti i percorsi sono relativi,
+quindi funziona anche in un sottopercorso.
+
+## Dati aziendali
+
+Sede: Via Enrico Fermi snc, 70024 Gravina in Puglia (BA) - P.IVA 08921740729.
+Le foto in `img/partner-*` provengono da ldrobotics.it e sono di proprietà dei rispettivi
+produttori (Universal Robots, Dobot, MiR, Microsoft, Robotiq, JAKA, ABB).
