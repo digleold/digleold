@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LD Technologies &amp; LD Robotics | Servizi informatici, software e robotica collaborativa</title>
   <meta name="description" content="LD Technologies e LD Robotics: servizi informatici, sviluppo software, gestione documentale e robotica collaborativa per PMI e industria. Gravina in Puglia (BA).">
-  <meta name="theme-color" content="#07090f">
+  <meta name="theme-color" content="#05070d">
   <link rel="icon" type="image/png" href="img/logo-ld-technologies.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="">
+  <div class="progress" aria-hidden="true"></div>
   <a class="skip" href="#main">Vai al contenuto</a>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="index.html" aria-label="LD - Home">LD<span>.</span></a>
+      <a class="brand" href="index.html" aria-label="LD - Home">LD<span>.</span><i></i></a>
       <button class="nav-toggle" aria-label="Apri il menu" aria-expanded="false">&#9776;</button>
       <nav class="nav-links" aria-label="Principale">
         <a href="index.html" aria-current="page">Home</a>
@@ -27,47 +28,66 @@
     </div>
   </header>
   <main id="main">
-    <section class="hero">
-      <div class="grid-bg"></div>
+    <section class="home-intro">
+      <div class="glow a"></div><div class="glow b"></div><div class="grid-bg"></div>
       <div class="container">
         <span class="eyebrow">Improve your business</span>
-        <h1>Tecnologia e automazione <span class="grad">per far crescere la tua impresa.</span></h1>
-        <p class="lead">Servizi informatici, sviluppo software, gestione documentale e robotica collaborativa: due divisioni, un unico partner per PMI e industria, da Gravina in Puglia.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="#divisioni">Scopri le divisioni</a>
-          <a class="btn btn-ghost" href="contatti.html">Prenota una consulenza gratuita</a>
-        </div>
+        <h1>Dove il <span class="grad">software</span> incontra la <span class="grad">robotica.</span></h1>
+        <p class="lead">Servizi informatici, sviluppo software, gestione documentale e robotica collaborativa per PMI e industria. Due divisioni, un unico partner, da Gravina in Puglia.</p>
       </div>
     </section>
 
-    <section class="section" id="divisioni">
+    <section class="panels" id="divisioni" aria-label="Le due divisioni">
+      <a class="panel tech" href="ld-technologies.html">
+        <canvas class="net" aria-hidden="true"></canvas>
+        <img class="panel-logo tile" src="img/logo-ld-technologies.png" alt="Logo LD Technologies" width="201" height="245">
+        <h2>LD Technologies</h2>
+        <p>Servizi informatici, sviluppo software e gestione documentale: lavorare in modo pi&ugrave; semplice, veloce e produttivo.</p>
+        <div class="tags"><span>Software su misura</span><span>Cloud</span><span>Sicurezza</span><span>Reti</span></div>
+        <span class="more">Entra in LD Technologies <b>&rarr;</b></span>
+      </a>
+      <a class="panel robo" href="ld-robotics.html">
+        <img class="bg-img" src="img/partner-robot-collaborativi.jpg" alt="" width="1217" height="694">
+        <img class="panel-logo" src="img/logo-ld-robotics.png" alt="Logo LD Robotics" width="500" height="203">
+        <h2>LD Robotics</h2>
+        <p>Servizi informatici rivolti all&rsquo;automazione: robotica collaborativa e soluzioni custom integrate nel flusso operativo dell&rsquo;azienda.</p>
+        <div class="tags"><span>Cobot</span><span>Pallettizzazione</span><span>Saldatura</span><span>Assemblaggio</span></div>
+        <span class="more">Entra in LD Robotics <b>&rarr;</b></span>
+      </a>
+    </section>
+
+    <section class="section" style="padding-bottom:0">
       <div class="container">
-        <span class="eyebrow">Le nostre divisioni</span>
-        <h2 class="reveal">Due anime, una visione.</h2>
-        <div class="divisions">
-          <a class="card division tech reveal" href="ld-technologies.html">
-            <span class="logo-tile"><img src="img/logo-ld-technologies.png" alt="Logo LD Technologies" width="201" height="245"></span>
-            <h3>LD Technologies</h3>
-            <p>Servizi informatici, sviluppo software e gestione documentale. Aiutiamo le imprese a lavorare in modo pi&ugrave; semplice, veloce e produttivo.</p>
-            <span class="more">Entra in LD Technologies &rarr;</span>
-          </a>
-          <a class="card division robo reveal" href="ld-robotics.html">
-            <img class="logo-wide" src="img/logo-ld-robotics.png" alt="Logo LD Robotics" width="500" height="203">
-            <h3>LD Robotics</h3>
-            <p>Servizi informatici rivolti all&rsquo;automazione: robotica collaborativa e soluzioni custom integrate nel flusso operativo dell&rsquo;azienda.</p>
-            <span class="more">Entra in LD Robotics &rarr;</span>
-          </a>
-        </div>
+        <span class="eyebrow">Partner tecnologici</span>
+      </div>
+      <div class="marquee" aria-label="Partner">
+        <ul class="marquee-track"><li><img src="img/partner-UR.png" alt="Universal Robots" loading="lazy"></li><li><img src="img/partner-dobot.png" alt="Dobot" loading="lazy"></li><li><img src="img/partner-ria-MIR_250.png" alt="MiR" loading="lazy"></li><li><img src="img/partner-robotiq.png" alt="Robotiq" loading="lazy"></li><li><img src="img/partner-JAKA-ROBOTICS-1x1-1-696x696-1.jpg" alt="JAKA Robotics" loading="lazy"></li><li><img src="img/partner-abb8294.jpg" alt="ABB" loading="lazy"></li><li><img src="img/partner-microsofotmixed.png" alt="Microsoft Partner - Mixed Reality" loading="lazy"></li><li aria-hidden="true"><img src="img/partner-UR.png" alt="" loading="lazy"></li><li aria-hidden="true"><img src="img/partner-dobot.png" alt="" loading="lazy"></li><li aria-hidden="true"><img src="img/partner-ria-MIR_250.png" alt="" loading="lazy"></li><li aria-hidden="true"><img src="img/partner-robotiq.png" alt="" loading="lazy"></li><li aria-hidden="true"><img src="img/partner-JAKA-ROBOTICS-1x1-1-696x696-1.jpg" alt="" loading="lazy"></li><li aria-hidden="true"><img src="img/partner-abb8294.jpg" alt="" loading="lazy"></li><li aria-hidden="true"><img src="img/partner-microsofotmixed.png" alt="" loading="lazy"></li></ul>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
         <div class="stats reveal">
-          <div class="stat"><strong>100+</strong><span>Progetti realizzati</span></div>
-          <div class="stat"><strong>100+</strong><span>Clienti soddisfatti</span></div>
-          <div class="stat"><strong>8</strong><span>Aree di servizio IT</span></div>
-          <div class="stat"><strong>6</strong><span>Applicazioni di robotica</span></div>
+          <div class="stat"><strong data-count="100" data-suffix="+">100+</strong><span>Progetti realizzati</span></div>
+          <div class="stat"><strong data-count="100" data-suffix="+">100+</strong><span>Clienti soddisfatti</span></div>
+          <div class="stat"><strong data-count="8">8</strong><span>Aree di servizio IT</span></div>
+          <div class="stat"><strong data-count="6">6</strong><span>Applicazioni di robotica</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="claim reveal">
+          <img src="img/partner-robot-collaborativi.jpg" alt="" width="1217" height="694" loading="lazy">
+          <div class="claim-inner">
+            <div class="big">85%</div>
+            <div>
+              <h2>Persone e robot insieme sono pi&ugrave; produttivi.</h2>
+              <p>Nessuna impresa &egrave; troppo piccola o troppo grande per la robotica collaborativa. Lo studio riportato dal Financial Times in &ldquo;Meet the cobot: humans and robots together on the factory floor&rdquo; mostra che la collaborazione aumenta la produttivit&agrave; dell&rsquo;85%.</p>
+              <a class="btn btn-primary" href="ld-robotics.html" style="--accent:var(--robo)">Scopri LD Robotics</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -77,9 +97,9 @@
         <span class="eyebrow">Testimonianze</span>
         <h2 class="reveal">Cosa dicono di noi</h2>
         <div class="cards">
-          <figure class="card quote reveal"><blockquote>&ldquo;Sono molto soddisfatto dei servizi dell&rsquo;azienda. Hanno migliorato l&rsquo;efficienza dei nostri processi produttivi grazie alla Cobotica e fornito un ottimo supporto.&rdquo;</blockquote><figcaption><strong>Giuseppe Aliano</strong><span>Base Pizza SRL</span></figcaption></figure>
-          <figure class="card quote reveal"><blockquote>&ldquo;La scelta di questa azienda di automazione e robotica collaborativa &egrave; stata vincente. Hanno aumentato la produttivit&agrave; e ridotto del 60% i costi operativi.&rdquo;</blockquote><figcaption><strong>Vincenzo D&rsquo;Agostino</strong><span>DAGEL Mangimi SRL</span></figcaption></figure>
-          <figure class="card quote reveal"><blockquote>&ldquo;Siamo estremamente soddisfatti dei risultati ottenuti collaborando con questa azienda. Hanno rivoluzionato il nostro sistema produttivo e offerto un ottimo supporto post-vendita.&rdquo;</blockquote><figcaption><strong>Gaetano Di Marzio</strong><span>FAVER spa</span></figcaption></figure>
+          <figure class="card quote reveal"><blockquote>Sono molto soddisfatto dei servizi dell&rsquo;azienda. Hanno migliorato l&rsquo;efficienza dei nostri processi produttivi grazie alla Cobotica e fornito un ottimo supporto.</blockquote><figcaption><strong>Giuseppe Aliano</strong><span>Base Pizza SRL</span></figcaption></figure>
+          <figure class="card quote reveal"><blockquote>La scelta di questa azienda di automazione e robotica collaborativa &egrave; stata vincente. Hanno aumentato la produttivit&agrave; e ridotto del 60% i costi operativi.</blockquote><figcaption><strong>Vincenzo D&rsquo;Agostino</strong><span>DAGEL Mangimi SRL</span></figcaption></figure>
+          <figure class="card quote reveal"><blockquote>Siamo estremamente soddisfatti dei risultati ottenuti collaborando con questa azienda. Hanno rivoluzionato il nostro sistema produttivo e offerto un ottimo supporto post-vendita.</blockquote><figcaption><strong>Gaetano Di Marzio</strong><span>FAVER spa</span></figcaption></figure>
         </div>
       </div>
     </section>
@@ -87,8 +107,9 @@
     <section class="section">
       <div class="container">
         <div class="cta reveal">
+          <span class="eyebrow">Parliamone</span>
           <h2>Hai un progetto in mente?</h2>
-          <p>Richiedi un incontro per informazioni pi&ugrave; dettagliate: ti proporremo la soluzione giusta per la tua azienda.</p>
+          <p>Prenota una consulenza gratuita o richiedi un incontro per informazioni pi&ugrave; dettagliate: ti proporremo la soluzione giusta per la tua azienda.</p>
           <div class="actions" style="justify-content:center">
             <a class="btn btn-primary" href="contatti.html">Contattaci</a>
             <a class="btn btn-ghost" href="tel:+390808493561">Chiama 080 849 3561</a>

@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LD Robotics | Robotica collaborativa e automazione industriale</title>
   <meta name="description" content="LD Robotics: servizi informatici rivolti all'automazione. Robotica collaborativa, cobot Universal Robots, Dobot, MiR e soluzioni custom per l'industria.">
-  <meta name="theme-color" content="#07090f">
+  <meta name="theme-color" content="#05070d">
   <link rel="icon" type="image/png" href="img/logo-ld-technologies.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="theme-robo">
+  <div class="progress" aria-hidden="true"></div>
   <a class="skip" href="#main">Vai al contenuto</a>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="index.html" aria-label="LD - Home">LD<span>.</span></a>
+      <a class="brand" href="index.html" aria-label="LD - Home">LD<span>.</span><i></i></a>
       <button class="nav-toggle" aria-label="Apri il menu" aria-expanded="false">&#9776;</button>
       <nav class="nav-links" aria-label="Principale">
         <a href="index.html">Home</a>
@@ -28,19 +29,42 @@
   </header>
   <main id="main">
     <section class="hero">
-      <div class="grid-bg"></div>
+      <div class="glow a"></div><div class="glow b"></div><div class="grid-bg"></div>
       <div class="container hero-grid">
-       <div>
-        <img class="logo-wide" src="img/logo-ld-robotics.png" alt="Logo LD Robotics" width="500" height="203">
-        <span class="eyebrow">LD Robotics &middot; Lavoriamo assieme dal 2015</span>
-        <h1>Nessuna impresa &egrave; troppo piccola&hellip; <span class="grad">o troppo grande per la robotica collaborativa.</span></h1>
-        <p class="lead">La collaborazione tra robot e persone &egrave; l&rsquo;85% pi&ugrave; produttiva. Lo afferma lo studio riportato dal Financial Times in &ldquo;Meet the cobot: humans and robots together on the factory floor&rdquo;.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="contatti.html">Contattaci</a>
-          <a class="btn btn-ghost" href="#applicazioni">Ambiti di applicazione</a>
+        <div>
+          <img class="logo-wide" src="img/logo-ld-robotics.png" alt="Logo LD Robotics" width="500" height="203">
+          <span class="eyebrow">Lavoriamo assieme dal 2015</span>
+          <h1>Nessuna impresa &egrave; troppo piccola&hellip; <span class="grad">o troppo grande per i cobot.</span></h1>
+          <p class="lead">La collaborazione tra robot e persone &egrave; l&rsquo;85% pi&ugrave; produttiva. Lo afferma lo studio riportato dal Financial Times in &ldquo;Meet the cobot: humans and robots together on the factory floor&rdquo;.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="contatti.html">Contattaci</a>
+            <a class="btn btn-ghost" href="#applicazioni">Ambiti di applicazione</a>
+          </div>
         </div>
-       </div>
-       <img class="hero-photo" src="img/partner-robot-collaborativi.jpg" alt="Braccio robotico collaborativo e mano umana" width="1217" height="694">
+        <div class="arm-stage">
+          <svg class="arm" viewBox="0 0 400 400" role="img" aria-label="Braccio robotico collaborativo in movimento">
+            <ellipse cx="200" cy="366" rx="120" ry="12" fill="rgba(0,0,0,.4)"/>
+            <rect class="base" x="140" y="332" width="120" height="30" rx="8"/>
+            <rect class="dark" x="168" y="318" width="64" height="20" rx="6"/>
+            <g class="j1">
+              <rect class="link" x="186" y="214" width="28" height="118" rx="14"/>
+              <circle class="joint" cx="200" cy="214" r="20"/><circle class="dark" cx="200" cy="214" r="8"/>
+              <g class="j2">
+                <rect class="link" x="188" y="104" width="24" height="110" rx="12"/>
+                <circle class="joint" cx="200" cy="104" r="16"/><circle class="dark" cx="200" cy="104" r="6"/>
+                <g class="j3">
+                  <rect class="link" x="190" y="58" width="20" height="46" rx="8"/>
+                  <rect class="dark" x="182" y="50" width="36" height="14" rx="4"/>
+                  <path class="claw l" d="M192 52 L186 22 L192 22 L198 50 Z" fill="#f7c600"/>
+                  <path class="claw r" d="M208 52 L214 22 L208 22 L202 50 Z" fill="#f7c600"/>
+                </g>
+              </g>
+            </g>
+          </svg>
+          <span class="chip-float c1">UR10e &middot; <b>12,5 kg</b> di carico</span>
+          <span class="chip-float c2">Sicurezza <b>ISO 10218-1</b></span>
+          <span class="chip-float c3"><b>Plug &amp; Play</b></span>
+        </div>
       </div>
     </section>
 
@@ -61,13 +85,13 @@
       <div class="container">
         <span class="eyebrow">Applicazioni</span>
         <h2 class="reveal">Ambiti di applicazione</h2>
-        <div class="cards">
-          <article class="card reveal"><div class="icon">01</div><h3>Finitura</h3><p>Lucidatura e levigatura con un tocco specifico e delicato.</p></article>
-          <article class="card reveal"><div class="icon">02</div><h3>Asservimento macchine</h3><p>Gestisci le macchine e libera i dipendenti per compiti pi&ugrave; preziosi.</p></article>
-          <article class="card reveal"><div class="icon">03</div><h3>Controllo qualit&agrave;</h3><p>I bracci robotici collaborativi offrono precisione e coerenza.</p></article>
-          <article class="card reveal"><div class="icon">04</div><h3>Assemblaggio</h3><p>Processi di assemblaggio ripetibili e accurati.</p></article>
-          <article class="card reveal"><div class="icon">05</div><h3>Pallettizzazione</h3><p>Con i cobot meno rischio di lesioni e sforzi per i dipendenti.</p></article>
-          <article class="card reveal"><div class="icon">06</div><h3>Saldatura</h3><p>La saldatura robotizzata garantisce maggiore precisione e uniformit&agrave;.</p></article>
+        <div class="bento robo-grid">
+          <article class="card reveal"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg></span><h3>Finitura</h3><p>Lucidatura e levigatura con un tocco specifico e delicato.</p></article>
+          <article class="card reveal"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></span><h3>Asservimento macchine</h3><p>Gestisci le macchine e libera i dipendenti per compiti pi&ugrave; preziosi.</p></article>
+          <article class="card reveal"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></span><h3>Controllo qualit&agrave;</h3><p>I bracci robotici collaborativi offrono precisione e coerenza.</p></article>
+          <article class="card reveal"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/><path d="M13 7h8v4M3 13h8v8"/></svg></span><h3>Assemblaggio</h3><p>Processi di assemblaggio ripetibili e accurati.</p></article>
+          <article class="card reveal"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18M5 20v-6h6v6M13 20v-9h6v9M8 14V8h6v3"/></svg></span><h3>Pallettizzazione</h3><p>Con i cobot meno rischio di lesioni e sforzi per i dipendenti.</p></article>
+          <article class="card reveal"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span><h3>Saldatura</h3><p>La saldatura robotizzata garantisce maggiore precisione e uniformit&agrave;.</p></article>
         </div>
         <div class="chips reveal" aria-label="Settori">
           <span>Alimentare</span><span>Automazione industriale</span><span>Metalmeccanico</span><span>Mobiliare</span><span>Plastica e polimeri</span><span>Tecnologico</span>
@@ -80,30 +104,24 @@
         <span class="eyebrow">Vantaggi</span>
         <h2 class="reveal">Perch&eacute; adottare un robot collaborativo?</h2>
         <div class="cards">
-          <article class="card reveal"><div class="icon">&#9919;</div><h3>Sicurezza</h3><p>I cobot sono progettati per lavorare in sicurezza a stretto contatto con le persone, riducendo il rischio di lesioni o danni.</p></article>
-          <article class="card reveal"><div class="icon">&#9889;</div><h3>Efficienza</h3><p>Possono lavorare in modo autonomo o insieme ai lavoratori, aumentando la produttivit&agrave; e riducendo i tempi di fermo.</p></article>
-          <article class="card reveal"><div class="icon">&#8644;</div><h3>Flessibilit&agrave;</h3><p>Si adattano rapidamente alle esigenze del lavoro: cambio di attrezzatura e riprogrammazione semplici.</p></article>
+          <article class="card reveal"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Sicurezza</h3><p>I cobot sono progettati per lavorare in sicurezza a stretto contatto con le persone, riducendo il rischio di lesioni o danni.</p></article>
+          <article class="card reveal"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span><h3>Efficienza</h3><p>Possono lavorare in modo autonomo o insieme ai lavoratori, aumentando la produttivit&agrave; e riducendo i tempi di fermo.</p></article>
+          <article class="card reveal"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></span><h3>Flessibilit&agrave;</h3><p>Si adattano rapidamente alle esigenze del lavoro: cambio di attrezzatura e riprogrammazione semplici.</p></article>
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <span class="eyebrow">Tecnologie e partner</span>
-        <h2 class="reveal">Le soluzioni che integriamo</h2>
+        <span class="eyebrow">Tecnologie</span>
+        <h2 class="reveal">Le soluzioni che integriamo.</h2>
         <div class="cards">
           <article class="card reveal"><img class="product" src="img/partner-UR10e1-1.png" alt="Cobot Universal Robots UR10e" loading="lazy"><h3>Universal Robots UR10e</h3><p>Cobot a 6 assi: 12,5 kg di carico utile e 1300 mm di raggio d&rsquo;azione. Ideale per asservimento macchine, pallettizzazione e imballaggio. Sicurezza certificata ISO 10218-1.</p></article>
           <article class="card reveal"><img class="product" src="img/partner-M1-scaled.webp" alt="Cobot Dobot M1 Pro" loading="lazy"><h3>Dobot M1 Pro</h3><p>Cobot a 4 assi, compatto e plug &amp; play, ideale per le esigenze produttive dell&rsquo;industria leggera.</p></article>
           <article class="card reveal"><img class="product" src="img/partner-mir1350-1.png" alt="Robot mobile MiR 1350" loading="lazy"><h3>MiR 1350</h3><p>Robot mobile collaborativo per il trasporto di pallet e merci pesanti, conforme a ISO 3691-4 e IP52.</p></article>
           <article class="card reveal"><img class="product" src="img/partner-RE4P81F.png" alt="Visore Microsoft HoloLens 2" loading="lazy"><h3>Microsoft HoloLens 2</h3><p>Realt&agrave; mista a mani libere per lavorare in sicurezza e collaborare da remoto tramite ologrammi.</p></article>
         </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <span class="eyebrow">I nostri partner</span>
-        <h2 class="reveal">Collaboriamo con i migliori produttori</h2>
+        <span class="eyebrow" style="margin-top:3rem">I nostri partner</span>
         <ul class="partners reveal"><li><img src="img/partner-UR.png" alt="Universal Robots" loading="lazy"></li><li><img src="img/partner-dobot.png" alt="Dobot" loading="lazy"></li><li><img src="img/partner-ria-MIR_250.png" alt="MiR" loading="lazy"></li><li><img src="img/partner-robotiq.png" alt="Robotiq" loading="lazy"></li><li><img src="img/partner-JAKA-ROBOTICS-1x1-1-696x696-1.jpg" alt="JAKA Robotics" loading="lazy"></li><li><img src="img/partner-abb8294.jpg" alt="ABB" loading="lazy"></li><li><img src="img/partner-microsofotmixed.png" alt="Microsoft Partner - Mixed Reality" loading="lazy"></li></ul>
       </div>
     </section>
@@ -121,6 +139,7 @@
     <section class="section">
       <div class="container">
         <div class="cta reveal">
+          <span class="eyebrow">Parliamone</span>
           <h2>Porta la robotica collaborativa nella tua azienda.</h2>
           <p>Raccontaci il tuo processo produttivo: progetteremo insieme la soluzione pi&ugrave; adatta.</p>
           <div class="actions" style="justify-content:center">
