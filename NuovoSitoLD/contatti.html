@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatti | LD</title>
+  <meta name="description" content="Contatta LD Technologies e LD Robotics.">
+  <meta name="theme-color" content="#07090f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="">
+  <a class="skip" href="#main">Vai al contenuto</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="LD - Home">LD<span>.</span></a>
+      <button class="nav-toggle" aria-label="Apri il menu" aria-expanded="false">&#9776;</button>
+      <nav class="nav-links" aria-label="Principale">
+        <a href="index.html">Home</a>
+        <a href="ld-technologies.html">LD Technologies</a>
+        <a href="ld-robotics.html">LD Robotics</a>
+        <a href="contatti.html" class="btn btn-primary" aria-current="page">Contatti</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div class="grid-bg"></div>
+      <div class="container">
+        <span class="eyebrow">Contatti</span>
+        <h1>Parliamo del tuo <span class="grad">progetto.</span></h1>
+        <p class="lead">Scrivici e ti risponderemo il prima possibile.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container contact-grid">
+        <form action="#" method="post" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Modulo non ancora collegato';">
+          <label>Nome <input name="nome" required autocomplete="name"></label>
+          <label>Email <input name="email" type="email" required autocomplete="email"></label>
+          <label>Divisione
+            <select name="divisione"><option>LD Technologies</option><option>LD Robotics</option><option>Non so / altro</option></select>
+          </label>
+          <label>Messaggio <textarea name="messaggio" required></textarea></label>
+          <button class="btn btn-primary" type="submit">Invia messaggio</button>
+          <span class="placeholder">Il modulo non invia ancora nulla: va collegato a un servizio email.</span>
+        </form>
+        <div class="card">
+          <h3>Dati di contatto</h3>
+          <p>[DA SOSTITUIRE: email, telefono, indirizzo, P.IVA]</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>&copy; <span data-year></span> LD &middot; [DA SOSTITUIRE: ragione sociale, P.IVA]</span>
+      <nav aria-label="Footer">
+        <a href="ld-technologies.html">LD Technologies</a>
+        <a href="ld-robotics.html">LD Robotics</a>
+        <a href="contatti.html">Contatti</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -3,18 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NuovoSitoLD</title>
+  <title>LD | Technologies &amp; Robotics</title>
+  <meta name="description" content="Il gruppo LD riunisce LD Technologies e LD Robotics: tecnologia e robotica per le imprese.">
+  <meta name="theme-color" content="#07090f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <header>
-    <h1>NuovoSitoLD</h1>
+<body class="">
+  <a class="skip" href="#main">Vai al contenuto</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="LD - Home">LD<span>.</span></a>
+      <button class="nav-toggle" aria-label="Apri il menu" aria-expanded="false">&#9776;</button>
+      <nav class="nav-links" aria-label="Principale">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="ld-technologies.html">LD Technologies</a>
+        <a href="ld-robotics.html">LD Robotics</a>
+        <a href="contatti.html" class="btn btn-primary">Contatti</a>
+      </nav>
+    </div>
   </header>
-  <main>
-    <p>Benvenuto! Il sito è in costruzione.</p>
+  <main id="main">
+    <section class="hero">
+      <div class="grid-bg"></div>
+      <div class="container">
+        <span class="eyebrow">Gruppo LD</span>
+        <h1>Tecnologia e robotica,<br><span class="grad">progettate per far crescere il tuo business.</span></h1>
+        <p class="lead">[DA SOSTITUIRE: claim del gruppo, dai siti attuali]. Due divisioni, un unico partner affidabile.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#divisioni">Scopri le divisioni</a>
+          <a class="btn btn-ghost" href="contatti.html">Parliamone</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="divisioni">
+      <div class="container">
+        <span class="eyebrow">Le nostre divisioni</span>
+        <h2 class="reveal">Due anime, una visione.</h2>
+        <div class="divisions">
+          <a class="card division tech reveal" href="ld-technologies.html">
+            <div class="icon">&lt;/&gt;</div>
+            <h3>LD Technologies</h3>
+            <p>[DA SOSTITUIRE: descrizione breve da ldtechnologies.it]</p>
+            <span class="more">Entra in LD Technologies &rarr;</span>
+          </a>
+          <a class="card division robo reveal" href="ld-robotics.html">
+            <div class="icon">&#9881;</div>
+            <h3>LD Robotics</h3>
+            <p>[DA SOSTITUIRE: descrizione breve da ldrobotics.it]</p>
+            <span class="more">Entra in LD Robotics &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="stats reveal">
+          <div class="stat"><strong>[00]+</strong><span>Anni di esperienza</span></div>
+          <div class="stat"><strong>[00]+</strong><span>Progetti realizzati</span></div>
+          <div class="stat"><strong>[00]+</strong><span>Clienti</span></div>
+          <div class="stat"><strong>2</strong><span>Divisioni</span></div>
+        </div>
+        <p class="placeholder" style="text-align:center;margin-top:1.2rem">Numeri da sostituire con quelli reali.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta reveal">
+          <h2>Hai un progetto in mente?</h2>
+          <p>Raccontaci la tua idea: ti ricontatteremo per trovare la soluzione giusta.</p>
+          <div class="actions" style="justify-content:center">
+            <a class="btn btn-primary" href="contatti.html">Contattaci</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer>
-    <small>&copy; LD</small>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>&copy; <span data-year></span> LD &middot; [DA SOSTITUIRE: ragione sociale, P.IVA]</span>
+      <nav aria-label="Footer">
+        <a href="ld-technologies.html">LD Technologies</a>
+        <a href="ld-robotics.html">LD Robotics</a>
+        <a href="contatti.html">Contatti</a>
+      </nav>
+    </div>
   </footer>
   <script src="js/main.js"></script>
 </body>
