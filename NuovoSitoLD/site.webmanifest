@@ -1,0 +1,16 @@
+{
+  "name": "LD Technologies SRL",
+  "short_name": "LD Technologies",
+  "description": "Software su misura, servizi IT, cloud, sicurezza e robotica collaborativa per PMI e industria.",
+  "lang": "it",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#05070d",
+  "theme_color": "#05070d",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

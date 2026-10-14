@@ -40,3 +40,17 @@ Le foto in `img/partner-*` provengono da ldrobotics.it e sono dei rispettivi pro
 
 Il modulo contatti apre il programma di posta (`mailto:`); per un invio diretto va collegato
 a un servizio di form.
+
+## SEO e prestazioni
+
+- Titolo e description ottimizzati, canonical, Open Graph e Twitter Card (`img/og-image.jpg`, 1200x630).
+- Dati strutturati Schema.org (JSON-LD): organizzazione/attivita locale con indirizzo, P.IVA, contatti e catalogo servizi; sito web; pagina; FAQ.
+- Sezione FAQ visibile (8 domande) allineata ai dati strutturati.
+- `robots.txt`, `sitemap.xml`, `site.webmanifest`, icone (favicon, apple-touch, 192/512), pagina `404.html`.
+- Dominio di destinazione usato in canonical, sitemap e Open Graph: **https://www.ldtechnologies.it/**. Se cambia, aggiornare `index.html`, `robots.txt` e `sitemap.xml`.
+- Immagini in WebP con `width`/`height`; Three.js caricato dopo il caricamento della pagina e solo su dispositivi adatti; font non bloccanti con ripiego calibrato.
+- Misure Lighthouse (mobile, rete lenta simulata): Prestazioni 97, Accessibilita 100, Best Practices 96, SEO 100, CLS 0,004.
+
+## Responsive
+
+Menu a tendina fino a 1000px, griglie a 4/2/1 colonne, telefoni in orizzontale, zone sicure (notch), schermi 2K/4K (la base dei font cresce), aree di tocco di almeno 44px, effetti 3D delle card solo con mouse.

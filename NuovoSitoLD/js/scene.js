@@ -1,15 +1,36 @@
 // Fondale 3D (Three.js r128): braccio robotico + rete di nodi, guidati dallo scroll e dal mouse.
 (() => {
   const canvas = document.getElementById('scene');
-  const T = window.THREE;
-  if (!canvas || !T) { document.body.classList.add('no-3d'); return; }
+  if (!canvas) return;
+
+  // Niente 3D su connessioni lente, risparmio dati o dispositivi poco potenti: il sito resta completo.
+  const conn = navigator.connection || {};
+  const lowEnd = conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '') ||
+    (navigator.deviceMemory && navigator.deviceMemory <= 2) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2);
+  if (lowEnd) { document.body.classList.add('no-3d'); return; }
+
+  // Three.js (circa 600 KB) si scarica solo dopo il caricamento della pagina, nei tempi morti del browser.
+  const THREE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  const boot = () => {
+    if (window.THREE) { init(window.THREE); return; }
+    const s = document.createElement('script');
+    s.src = THREE_URL; s.async = true;
+    s.onload = () => init(window.THREE);
+    s.onerror = () => document.body.classList.add('no-3d');
+    document.head.appendChild(s);
+  };
+  const later = () => (window.requestIdleCallback ? window.requestIdleCallback(boot, { timeout: 2500 }) : setTimeout(boot, 800));
+  if (document.readyState === 'complete') later(); else window.addEventListener('load', later, { once: true });
+
+  function init(T) {
+  if (!T) { document.body.classList.add('no-3d'); return; }
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let renderer;
   try {
     renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
   } catch (e) { document.body.classList.add('no-3d'); return; }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 760 ? 1.5 : 1.75));
   renderer.outputEncoding = T.sRGBEncoding;
   renderer.toneMapping = T.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
@@ -155,6 +176,8 @@
   let raf = 0;
 
   function frame() {
+    // Con la finestra di dettaglio aperta la scena e' coperta: non serve ridisegnarla.
+    if (!reduce && document.documentElement.classList.contains('dlg-open')) { raf = requestAnimationFrame(frame); return; }
     const nowS = performance.now() / 1000, dt = Math.min(0.25, nowS - last); last = nowS;
     const t = reduce ? 3 : nowS - t0;
     const k = reduce ? 1 : 1 - Math.exp(-dt * 4.5);
@@ -216,4 +239,5 @@
   if (reduce) { window.addEventListener('scroll', () => requestAnimationFrame(frame), { passive: true }); }
   document.body.classList.add('has-3d');
   frame();
+  }
 })();
