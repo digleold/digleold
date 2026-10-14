@@ -14,7 +14,7 @@ Poi apri http://localhost:8000.
 
 ## Struttura
 
-- `index.html` - pagina unica: home, chi siamo, servizi IT, robotica, metodo, partner, progetti, contatti
+- `index.html` - pagina unica: home, chi siamo, servizi IT, robotica, metodo, progetti (portfolio filtrabile con schede di dettaglio), partner (schede prodotto), contatti
 - `css/style.css` - stili, variabili colore, effetti 3D CSS (card inclinabili, anello partner, passi in prospettiva)
 - `js/scene.js` - fondale 3D con Three.js r128 (braccio robotico + rete di nodi), guidato da scroll e mouse
 - `js/main.js` - menu mobile, animazioni allo scroll, contatori, inclinazione 3D delle card, modulo
