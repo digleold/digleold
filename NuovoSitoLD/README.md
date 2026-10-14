@@ -1,7 +1,7 @@
 # NuovoSitoLD
 
-Sito del gruppo LD che riunisce **LD Technologies** e **LD Robotics**.
-Sito statico (HTML, CSS, JavaScript), tema dark tech, responsive.
+Sito di **LD Technologies SRL**: servizi informatici, sviluppo software, gestione documentale,
+cloud, sicurezza e robotica collaborativa. Pagina unica con fondale 3D.
 
 ## Avvio in locale
 
@@ -14,32 +14,29 @@ Poi apri http://localhost:8000.
 
 ## Struttura
 
-- `index.html` – home del gruppo con le due divisioni
-- `ld-technologies.html` – sezione LD Technologies (tema ciano)
-- `ld-robotics.html` – sezione LD Robotics (tema viola)
-- `contatti.html` – contatti e modulo (non ancora collegato a un servizio email)
-- `css/style.css` – stili e variabili colore
-- `js/main.js` – menu mobile e animazioni allo scroll
-- `img/` – immagini e loghi
+- `index.html` - pagina unica: home, chi siamo, servizi IT, robotica, metodo, partner, progetti, contatti
+- `css/style.css` - stili, variabili colore, effetti 3D CSS (card inclinabili, anello partner, passi in prospettiva)
+- `js/scene.js` - fondale 3D con Three.js r128 (braccio robotico + rete di nodi), guidato da scroll e mouse
+- `js/main.js` - menu mobile, animazioni allo scroll, contatori, inclinazione 3D delle card, modulo
+- `img/` - loghi e foto dei partner
 
-## Contenuti
-
-I testi, i loghi e i contatti provengono da ldtechnologies.it e ldrobotics.it
-(scaricati a ottobre 2026). Le sezioni di esempio dei template WordPress originali
-(team fittizio, articoli demo, premi, case study "Industrium") non sono state riportate.
-
-Il modulo in `contatti.html` apre il programma di posta con il messaggio compilato
-(`mailto:`); per un invio diretto va collegato a un servizio di form.
+Three.js viene caricato da cdnjs (versione fissa r128). Se WebGL non e disponibile il sito
+resta pienamente utilizzabile con uno sfondo a gradiente. Con "riduci movimento" attivo nel
+sistema le animazioni si fermano.
 
 ## Pubblicazione su GitHub Pages
 
 Il workflow `.github/workflows/pages.yml` pubblica la cartella `NuovoSitoLD` ad ogni push
 sul branch predefinito. Attivazione una tantum: Settings > Pages > Source: **GitHub Actions**.
-Il sito sarà su `https://digleold.github.io/digleold/`. Tutti i percorsi sono relativi,
-quindi funziona anche in un sottopercorso.
+Il sito sara su `https://digleold.github.io/digleold/` (percorsi relativi).
 
 ## Dati aziendali
 
-Sede: Via Enrico Fermi snc, 70024 Gravina in Puglia (BA) - P.IVA 08921740729.
-Le foto in `img/partner-*` provengono da ldrobotics.it e sono di proprietà dei rispettivi
-produttori (Universal Robots, Dobot, MiR, Microsoft, Robotiq, JAKA, ABB).
+LD Technologies SRL - Via Enrico Fermi snc, 70024 Gravina in Puglia (BA) - P.IVA 08921740729.
+Testi, loghi e contatti provengono da ldtechnologies.it e ldrobotics.it. Le sezioni di esempio
+dei template WordPress originali (team fittizio, articoli demo, premi) non sono state riportate.
+Le foto in `img/partner-*` provengono da ldrobotics.it e sono dei rispettivi produttori
+(Universal Robots, Dobot, MiR, Microsoft, Robotiq, JAKA, ABB).
+
+Il modulo contatti apre il programma di posta (`mailto:`); per un invio diretto va collegato
+a un servizio di form.

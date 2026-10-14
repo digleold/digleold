@@ -1,4 +1,5 @@
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 // Menu mobile
 const toggle = document.querySelector('.nav-toggle');
@@ -25,6 +26,21 @@ if (bar) {
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+}
+
+// Voce di menu attiva in base alla sezione visibile
+const navAnchors = [...document.querySelectorAll('.nav-links a[href^="#"]:not(.btn)')];
+if (navAnchors.length && 'IntersectionObserver' in window) {
+  const map = new Map(navAnchors.map((a) => [a.getAttribute('href').slice(1), a]));
+  const so = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting && map.has(en.target.id)) {
+        navAnchors.forEach((a) => a.classList.remove('active'));
+        map.get(en.target.id).classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  map.forEach((_, id) => { const s = document.getElementById(id); if (s) so.observe(s); });
 }
 
 // Comparsa allo scroll
@@ -61,79 +77,34 @@ document.querySelectorAll('[data-count]').forEach((el) => {
   io.observe(el);
 });
 
-// Effetto luce che segue il cursore sulle card
-document.addEventListener('pointermove', (e) => {
-  const card = e.target.closest && e.target.closest('.card');
-  if (!card) return;
-  const r = card.getBoundingClientRect();
-  card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-  card.style.setProperty('--my', `${e.clientY - r.top}px`);
-});
-
-// Rete di nodi animata (canvas.net)
-document.querySelectorAll('canvas.net').forEach((canvas) => {
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
-  let w = 0, h = 0, nodes = [], raf = 0, visible = true;
-  const mouse = { x: -999, y: -999 };
-
-  const resize = () => {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = canvas.clientWidth; h = canvas.clientHeight;
-    canvas.width = w * dpr; canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.max(24, Math.min(70, Math.round((w * h) / 16000)));
-    nodes = Array.from({ length: n }, () => ({
-      x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
-    }));
-  };
-
-  const draw = () => {
-    ctx.clearRect(0, 0, w, h);
-    for (const a of nodes) {
-      if (!reduceMotion) {
-        a.x += a.vx; a.y += a.vy;
-        if (a.x < 0 || a.x > w) a.vx *= -1;
-        if (a.y < 0 || a.y > h) a.vy *= -1;
-      }
-    }
-    for (let i = 0; i < nodes.length; i++) {
-      const a = nodes[i];
-      for (let j = i + 1; j < nodes.length; j++) {
-        const b = nodes[j], d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d < 130) {
-          ctx.strokeStyle = `rgba(52, 225, 162, ${0.35 * (1 - d / 130)})`;
-          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-        }
-      }
-      const dm = Math.hypot(a.x - mouse.x, a.y - mouse.y);
-      if (dm < 160) {
-        ctx.strokeStyle = `rgba(247, 198, 0, ${0.6 * (1 - dm / 160)})`;
-        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
-      }
-      ctx.fillStyle = dm < 160 ? '#f7c600' : '#34e1a2';
-      ctx.beginPath(); ctx.arc(a.x, a.y, 2, 0, Math.PI * 2); ctx.fill();
-    }
-    if (!reduceMotion && visible) raf = requestAnimationFrame(draw);
-  };
-
-  const host = canvas.parentElement;
-  host.addEventListener('pointermove', (e) => {
-    const r = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+// Inclinazione 3D delle card + luce che segue il cursore
+if (finePointer && !reduceMotion) {
+  document.querySelectorAll('.tilt').forEach((el) => {
+    const max = Number(el.dataset.tilt) || 9;
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      el.classList.add('live');
+      el.style.setProperty('--ry', `${(x - 0.5) * 2 * max}deg`);
+      el.style.setProperty('--rx', `${-(y - 0.5) * 2 * max}deg`);
+      el.style.setProperty('--mx', `${x * r.width}px`);
+      el.style.setProperty('--my', `${y * r.height}px`);
+    });
+    el.addEventListener('pointerleave', () => {
+      el.classList.remove('live');
+      el.style.setProperty('--rx', '0deg');
+      el.style.setProperty('--ry', '0deg');
+    });
   });
-  host.addEventListener('pointerleave', () => { mouse.x = mouse.y = -999; });
-  new ResizeObserver(() => { resize(); if (reduceMotion) draw(); }).observe(canvas);
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver((en) => {
-      visible = en[0].isIntersecting;
-      cancelAnimationFrame(raf);
-      if (visible) draw();
-    }).observe(canvas);
-  }
-  resize(); draw();
-});
+} else {
+  document.addEventListener('pointermove', (e) => {
+    const card = e.target.closest && e.target.closest('.card');
+    if (!card) return;
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    card.style.setProperty('--my', `${e.clientY - r.top}px`);
+  });
+}
 
 // Anno nel footer
 document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
@@ -147,6 +118,6 @@ if (form) {
     const d = new FormData(form);
     const subject = encodeURIComponent('Richiesta informazioni dal sito');
     const body = encodeURIComponent(`Nome: ${d.get('nome')}\nEmail: ${d.get('email')}\n\n${d.get('messaggio')}`);
-    window.location.href = `mailto:${d.get('divisione')}?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${d.get('argomento')}?subject=${subject}&body=${body}`;
   });
 }
