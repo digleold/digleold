@@ -32,3 +32,16 @@ if ('IntersectionObserver' in window) {
 
 // Anno nel footer
 document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
+
+// Modulo contatti: apre il programma di posta con il messaggio compilato
+const form = document.getElementById('contact-form');
+if (form) {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const d = new FormData(form);
+    const subject = encodeURIComponent('Richiesta informazioni dal sito');
+    const body = encodeURIComponent(`Nome: ${d.get('nome')}\nEmail: ${d.get('email')}\n\n${d.get('messaggio')}`);
+    window.location.href = `mailto:${d.get('divisione')}?subject=${subject}&body=${body}`;
+  });
+}

@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contatti | LD</title>
-  <meta name="description" content="Contatta LD Technologies e LD Robotics.">
+  <title>Contatti | LD Technologies &amp; LD Robotics</title>
+  <meta name="description" content="Contatta LD Technologies e LD Robotics a Gravina in Puglia (BA): telefono 080 849 3561, email info@ldtechnologies.it e info@ldrobotics.it.">
   <meta name="theme-color" content="#07090f">
+  <link rel="icon" type="image/png" href="img/logo-ld-technologies.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -31,35 +32,46 @@
       <div class="container">
         <span class="eyebrow">Contatti</span>
         <h1>Parliamo del tuo <span class="grad">progetto.</span></h1>
-        <p class="lead">Scrivici e ti risponderemo il prima possibile.</p>
+        <p class="lead">Chiama l&rsquo;assistenza o scrivici: prenota una consulenza gratuita e ricevi le informazioni che desideri.</p>
       </div>
     </section>
+
     <section class="section">
       <div class="container contact-grid">
-        <form action="#" method="post" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Modulo non ancora collegato';">
-          <label>Nome <input name="nome" required autocomplete="name"></label>
+        <form id="contact-form" novalidate>
+          <label>Nome e cognome <input name="nome" required autocomplete="name"></label>
           <label>Email <input name="email" type="email" required autocomplete="email"></label>
           <label>Divisione
-            <select name="divisione"><option>LD Technologies</option><option>LD Robotics</option><option>Non so / altro</option></select>
+            <select name="divisione">
+              <option value="info@ldtechnologies.it">LD Technologies</option>
+              <option value="info@ldrobotics.it">LD Robotics</option>
+            </select>
           </label>
           <label>Messaggio <textarea name="messaggio" required></textarea></label>
           <button class="btn btn-primary" type="submit">Invia messaggio</button>
-          <span class="placeholder">Il modulo non invia ancora nulla: va collegato a un servizio email.</span>
+          <small class="muted">Si aprir&agrave; il tuo programma di posta con il messaggio gi&agrave; compilato.</small>
         </form>
         <div class="card">
-          <h3>Dati di contatto</h3>
-          <p>[DA SOSTITUIRE: email, telefono, indirizzo, P.IVA]</p>
+          <h3>Sede</h3>
+          <p>Via Maurizio Lettieri 68<br>70024 Gravina in Puglia (BA)</p>
+          <h3>Telefono</h3>
+          <p><a class="link" href="tel:+390808493561">080 849 3561</a></p>
+          <h3>Email</h3>
+          <p><a class="link" href="mailto:info@ldtechnologies.it">info@ldtechnologies.it</a><br><a class="link" href="mailto:info@ldrobotics.it">info@ldrobotics.it</a></p>
+          <h3>Social</h3>
+          <p><a class="link" href="https://www.facebook.com/profile.php?id=100095597971748" target="_blank" rel="noopener">Facebook LD Robotics</a></p>
         </div>
       </div>
     </section>
   </main>
   <footer class="site-footer">
     <div class="container footer-inner">
-      <span>&copy; <span data-year></span> LD &middot; [DA SOSTITUIRE: ragione sociale, P.IVA]</span>
+      <span>&copy; <span data-year></span> LD Technologies &middot; LD Robotics &mdash; Via Maurizio Lettieri 68, 70024 Gravina in Puglia (BA)</span>
       <nav aria-label="Footer">
         <a href="ld-technologies.html">LD Technologies</a>
         <a href="ld-robotics.html">LD Robotics</a>
         <a href="contatti.html">Contatti</a>
+        <a href="tel:+390808493561">080 849 3561</a>
       </nav>
     </div>
   </footer>

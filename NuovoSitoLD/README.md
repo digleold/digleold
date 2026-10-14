@@ -22,7 +22,11 @@ Poi apri http://localhost:8000.
 - `js/main.js` – menu mobile e animazioni allo scroll
 - `img/` – immagini e loghi
 
-## Da fare
+## Contenuti
 
-I testi segnati `[DA SOSTITUIRE]` sono segnaposto: vanno sostituiti con i contenuti
-reali di ldtechnologies.it e ldrobotics.it, insieme a loghi, contatti e dati societari.
+I testi, i loghi e i contatti provengono da ldtechnologies.it e ldrobotics.it
+(scaricati a ottobre 2026). Le sezioni di esempio dei template WordPress originali
+(team fittizio, articoli demo, premi, case study "Industrium") non sono state riportate.
+
+Il modulo in `contatti.html` apre il programma di posta con il messaggio compilato
+(`mailto:`); per un invio diretto va collegato a un servizio di form.
