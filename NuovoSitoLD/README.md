@@ -26,6 +26,17 @@ Poi apri http://localhost:8000 (italiano) o http://localhost:8000/en/ (inglese).
 - `img/` - loghi, schermate dei progetti, foto dei partner (WebP).
 - `404.html` (bilingue), `robots.txt`, `sitemap.xml` (con hreflang), `site.webmanifest`, icone.
 
+## Grafica robotica
+
+- **Apertura:** robot 3D nel riquadro, con segni di taglio agli angoli e lettura in tempo reale dei giunti (J1-J4, gli stessi angoli che muovono il braccio) e conteggio delle casse impilate.
+- **Nastro pick-and-place** (tra "Cosa facciamo" e "Servizi"): illustrazione SVG a tratto di un braccio che prende una cassa dal nastro e la posa sul pallet, ciclo di 12 s.
+  Il movimento e' calcolato con cinematica inversa a due bracci (pinza sempre verticale, cassa sempre nella pinza); i fotogrammi chiave sono generati nel CSS.
+  Si anima solo quando e' visibile; con "riduci movimento" resta un fotogramma fermo con la cassa nella pinza.
+- **Disegno tecnico** nella sezione scura: braccio a 4 giunti che si traccia al passaggio, con archi di movimento, quote J1-J4 e oscillazione lenta.
+- **Icone a tratto** per i 6 servizi di robotica (finitura, asservimento, controllo qualita', assemblaggio, pallettizzazione, saldatura).
+- **Barra di avanzamento** con una cassa che scorre sul binario.
+- Il 3D parte solo se il dispositivo supporta WebGL; altrimenti resta la foto e non si scarica Three.js.
+
 ## Lingue
 
 Due URL separati, ciascuno con titolo, descrizione, Open Graph, dati strutturati (JSON-LD) e FAQ nella propria lingua; `hreflang` it/en/x-default,
@@ -46,7 +57,7 @@ e ricorda la scelta. Contrasti verificati, aree di tocco di almeno 44px, navigaz
 
 - Dominio di destinazione in canonical, sitemap e Open Graph: **https://www.ldtechnologies.it/**. Se cambia, aggiornare `index.html`, `en/index.html` (rigenerare), `robots.txt` e `sitemap.xml`.
 - Immagini WebP con `width`/`height`; il robot 3D parte dopo il caricamento; font incorporati con ripiego calibrato (nessuno spostamento di layout).
-- Lighthouse (mobile, rete lenta simulata, con compressione), italiano e inglese: Prestazioni 99, Accessibilita 100, Best Practices 96, SEO 100, CLS 0, TBT 0 ms.
+- Lighthouse (mobile, rete lenta simulata, con compressione), italiano e inglese: Prestazioni 99, Accessibilita 100, Best Practices 96-100, SEO 100, CLS 0, TBT 0-60 ms; circa 215 KB trasferiti.
 
 ## Pubblicazione su GitHub Pages
 

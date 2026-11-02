@@ -19,7 +19,10 @@
     const go = () => setTimeout(() => (window.requestIdleCallback ? window.requestIdleCallback(fn, { timeout: 3000 }) : fn()), 1500);
     if (document.readyState === 'complete') go(); else window.addEventListener('load', go, { once: true });
   };
+  // Senza WebGL (o senza scheda grafica) resta la foto: non si scarica Three.js e non si generano errori in console.
+  const hasWebGL = () => { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; } };
   const boot = () => {
+    if (!hasWebGL()) return;
     if (window.THREE) { init(window.THREE); return; }
     const s = document.createElement('script'); s.src = THREE_URL; s.async = true;
     s.onload = () => init(window.THREE); document.head.appendChild(s);
@@ -148,6 +151,7 @@
     resize();
 
     let last = performance.now() / 1000, raf = 0, running = false, shown = false, yawOut = 0;
+    const hud = host.querySelector('.hud'), hudEls = hud ? [...hud.querySelectorAll('[data-j]')] : null, hudN = hud ? hud.querySelector('[data-n]') : null; let hudT = 0;
     const intro = { v: 0 };
     function frame() {
       const now = performance.now() / 1000, dt = Math.min(0.1, now - last); last = now;
@@ -160,6 +164,13 @@
       const r = workStep(dt, calm);
       yawIK = nearest(r.ik.yaw, yawIK);
       turret.rotation.y = yawIK; shoulder.rotation.z = r.ik.th1; elbow.rotation.z = r.ik.th2; wrist.rotation.z = r.ik.th3;
+      if (hudEls && now - hudT > 0.09) { // lettura dei giunti: gli stessi angoli che muovono il braccio
+        hudT = now;
+        const d = (v) => (v * 180) / Math.PI, f = (v) => (v < 0 ? '\u2212' : '+') + Math.abs(v).toFixed(1).padStart(5, '0') + '\u00b0';
+        const yaw = ((d(yawIK) + 180) % 360 + 360) % 360 - 180;
+        hudEls[0].textContent = f(yaw); hudEls[1].textContent = f(d(r.ik.th1)); hudEls[2].textContent = f(d(r.ik.th2)); hudEls[3].textContent = f(d(r.ik.th3));
+        if (hudN) hudN.textContent = Math.min(placed.length, slots.length) + ' / ' + slots.length;
+      }
       fL.position.x = -(r.open + 0.13); fR.position.x = r.open + 0.13;
 
       const aspect = camera.aspect, dist = aspect >= 1.4 ? 12.6 : clamp(10.6 * Math.pow(1.4 / aspect, 0.62), 10.6, 18);

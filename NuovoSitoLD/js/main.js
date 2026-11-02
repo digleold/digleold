@@ -94,6 +94,7 @@
   const par = $$('[data-parallax]');
   const parX = $$('[data-parallax-x]');
   const bar = $('.progress');
+  const crateEl = $('.progress-crate');
   const header = $('.site-header');
   const darks = $$('.dark, .site-footer');
   let ticking = false;
@@ -101,7 +102,7 @@
     ticking = false;
     const vh = window.innerHeight, y = window.scrollY, calm = isCalm();
     if (header) { const hy = 36; header.classList.toggle('on-dark', darks.some((el) => { const r = el.getBoundingClientRect(); return r.top <= hy && r.bottom >= hy; })); }
-    if (bar) { const h = document.documentElement.scrollHeight - vh; bar.style.transform = `scaleX(${h > 0 ? clamp(y / h, 0, 1) : 0})`; }
+    if (bar) { const h = document.documentElement.scrollHeight - vh, pr = h > 0 ? clamp(y / h, 0, 1) : 0; bar.style.transform = `scaleX(${pr})`; if (crateEl) crateEl.style.transform = `translate3d(${(pr * (window.innerWidth - 14)).toFixed(1)}px,0,0)`; }
     if (calm) return;
     rv.forEach((r) => {
       if (r.load || !r.visible) return;
@@ -129,6 +130,11 @@
     const io = new IntersectionObserver((en) => en.forEach((x) => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
     rise.forEach((el) => io.observe(el));
   } else rise.forEach((el) => el.classList.add('in'));
+
+  // ---------- Nastro pick-and-place: in movimento solo quando e' visibile ----------
+  const beltEl = $('.belt');
+  if (beltEl && 'IntersectionObserver' in window) new IntersectionObserver((en) => beltEl.classList.toggle('on', en[0].isIntersecting), { rootMargin: '80px 0px' }).observe(beltEl);
+  else if (beltEl) beltEl.classList.add('on');
 
   // ---------- Contatori ----------
   $$('[data-count]').forEach((el) => {

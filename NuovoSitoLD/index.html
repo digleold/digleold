@@ -344,7 +344,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="progress" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"></div><div class="progress-crate" aria-hidden="true"></div>
   <a class="skip" href="#main">Vai al contenuto</a>
   <header class="site-header">
     <div class="bar">
@@ -383,7 +383,7 @@
             <canvas aria-hidden="true"></canvas>
             <span class="chip tl">Robotica collaborativa</span>
             <span class="chip tr"><i></i>Cella in funzione</span>
-            <span class="chip bl">Pick & place · cinematica inversa</span>
+            <div class="hud" aria-hidden="true" data-crates="CASSE"><span>J1 <b data-j="0">+000.0°</b></span><span>J2 <b data-j="1">+000.0°</b></span><span>J3 <b data-j="2">+000.0°</b></span><span>J4 <b data-j="3">+000.0°</b></span><span class="hud-n">CASSE <b data-n>0 / 8</b></span></div>
           </div>
         </div>
       </div>
@@ -425,6 +425,37 @@
       </div>
     </section>
 
+    <div class="belt" aria-hidden="true">
+      <div class="wrap"><div class="belt-cap"><span class="mono">Linea 01 · ciclo 12 s</span><span class="mono">Pick & place</span></div></div>
+      <svg class="belt-svg" viewBox="0 0 1440 230" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <g class="bl-line">
+        <path d="M0 212H1440" class="bl-floor"/>
+        <rect x="-30" y="166" width="690" height="22" rx="11" fill="var(--bg)"/>
+        <path class="bl-run" d="M-30 166H660"/>
+        <g class="bl-roll"><circle cx="-4" cy="177" r="4.5"/><circle cx="36" cy="177" r="4.5"/><circle cx="76" cy="177" r="4.5"/><circle cx="116" cy="177" r="4.5"/><circle cx="156" cy="177" r="4.5"/><circle cx="196" cy="177" r="4.5"/><circle cx="236" cy="177" r="4.5"/><circle cx="276" cy="177" r="4.5"/><circle cx="316" cy="177" r="4.5"/><circle cx="356" cy="177" r="4.5"/><circle cx="396" cy="177" r="4.5"/><circle cx="436" cy="177" r="4.5"/><circle cx="476" cy="177" r="4.5"/><circle cx="516" cy="177" r="4.5"/><circle cx="556" cy="177" r="4.5"/><circle cx="596" cy="177" r="4.5"/><circle cx="636" cy="177" r="4.5"/></g>
+        <g><path d="M120 188V212M104 212h32"/><path d="M380 188V212M364 212h32"/><path d="M600 188V212M584 212h32"/></g>
+        <g><rect x="787.0" y="198.0" width="156" height="9" rx="1.5"/><rect x="795.0" y="207.0" width="18" height="5.0" rx="1"/><rect x="856.0" y="207.0" width="18" height="5.0" rx="1"/><rect x="917.0" y="207.0" width="18" height="5.0" rx="1"/></g>
+        <rect x="708.0" y="164.0" width="44" height="48.0" rx="4" fill="var(--bg)"/>
+        <path d="M694.0 212h72" />
+      </g>
+      <g class="bl-a1" style="transform-origin:730.0px 158.0px">
+        <rect class="bl-link" x="721.0" y="49.0" width="18" height="118.0" rx="9"/>
+        <g class="bl-a2" style="transform-origin:730.0px 58.0px">
+          <rect class="bl-link" x="722.0" y="-45.0" width="16" height="111.0" rx="8"/>
+          <g class="bl-g" style="transform-origin:730.0px -37.0px">
+            <rect class="bl-link" x="718.0" y="-39.0" width="24" height="12" rx="3"/>
+            <rect class="bl-fing bl-fl" x="707.0" y="-29.0" width="5" height="22.0" rx="1.5"/>
+            <rect class="bl-fing bl-fr" x="748.0" y="-29.0" width="5" height="22.0" rx="1.5"/>
+            <circle class="bl-joint" cx="730.0" cy="-37.0" r="9"/><circle class="bl-dot" cx="730.0" cy="-37.0" r="3"/>
+          </g>
+          <circle class="bl-joint" cx="730.0" cy="58.0" r="12"/><circle class="bl-dot" cx="730.0" cy="58.0" r="3.5"/>
+        </g>
+      </g>
+      <circle class="bl-joint" cx="730.0" cy="158.0" r="14"/><circle class="bl-dot" cx="730.0" cy="158.0" r="4"/>
+      <g class="bl-cr"><rect x="-19.0" y="-19.0" width="38.0" height="38.0" rx="3"/><path d="M-19.0 -5h38.0M-19.0 5h38.0" class="bl-strap"/></g>
+    </svg>
+    </div>
+
     <section class="section" id="servizi" aria-labelledby="servizi-titolo">
       <div class="wrap">
         <div class="rule"><span class="label">Servizi</span><span class="label">14 aree di competenza</span></div>
@@ -432,25 +463,25 @@
         <div class="svc-group" style="margin-top:clamp(2.4rem,5vw,4.5rem)">
           <div class="svc-title"><span class="label">Software e infrastrutture</span><span class="label">8</span></div>
           <div class="svc">
-          <details name="svc"><summary><span class="n">01</span><span class="t">Gestione IT completa</span><span class="cat">Servizi informatici</span><span class="pl" aria-hidden="true"></span></summary><p class="more">Gestione di hardware, software e funzioni di rete, per PMI e Pubblica Amministrazione locale. Semplifichiamo e integriamo processi aziendali, applicazioni e sistemi informatici con le tecnologie leader di mercato.</p></details>
-          <details name="svc"><summary><span class="n">02</span><span class="t">Infrastruttura di rete</span><span class="cat">Servizi informatici</span><span class="pl" aria-hidden="true"></span></summary><p class="more">Progettiamo una rete informatica adeguata e personalizzata.</p></details>
-          <details name="svc"><summary><span class="n">03</span><span class="t">Sicurezza informatica</span><span class="cat">Servizi informatici</span><span class="pl" aria-hidden="true"></span></summary><p class="more">Valutiamo con attenzione il sistema di sicurezza della tua azienda.</p></details>
-          <details name="svc"><summary><span class="n">04</span><span class="t">Virtualizzazione</span><span class="cat">Servizi informatici</span><span class="pl" aria-hidden="true"></span></summary><p class="more">Semplifica e riduci i costi di implementazione e mantenimento dell’infrastruttura IT.</p></details>
-          <details name="svc"><summary><span class="n">05</span><span class="t">Software personalizzati</span><span class="cat">Software</span><span class="pl" aria-hidden="true"></span></summary><p class="more">La nostra attività principale è la progettazione e lo sviluppo di software applicativo per le PMI: soluzioni su misura che superano i limiti dei prodotti standard e si integrano nel sistema informativo esistente. Analisi, progettazione e sviluppo, sempre condivisi con il Cliente.</p></details>
-          <details name="svc"><summary><span class="n">06</span><span class="t">Siti web ed e-commerce</span><span class="cat">Software</span><span class="pl" aria-hidden="true"></span></summary><p class="more">Siti web moderni, veloci e performanti, ed e-commerce.</p></details>
-          <details name="svc"><summary><span class="n">07</span><span class="t">Cloud computing</span><span class="cat">Servizi informatici</span><span class="pl" aria-hidden="true"></span></summary><p class="more">Servizi di cloud computing affidabili e personalizzabili.</p></details>
-          <details name="svc"><summary><span class="n">08</span><span class="t">Gestione documentale</span><span class="cat">Servizi informatici</span><span class="pl" aria-hidden="true"></span></summary><p class="more">Servizi di gestione documentale per le imprese.</p></details>
+          <details name="svc"><summary><span class="n">01</span><span class="t">Gestione IT completa</span><span class="cat"><span class="tx">Servizi informatici</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">Gestione di hardware, software e funzioni di rete, per PMI e Pubblica Amministrazione locale. Semplifichiamo e integriamo processi aziendali, applicazioni e sistemi informatici con le tecnologie leader di mercato.</p></details>
+          <details name="svc"><summary><span class="n">02</span><span class="t">Infrastruttura di rete</span><span class="cat"><span class="tx">Servizi informatici</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">Progettiamo una rete informatica adeguata e personalizzata.</p></details>
+          <details name="svc"><summary><span class="n">03</span><span class="t">Sicurezza informatica</span><span class="cat"><span class="tx">Servizi informatici</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">Valutiamo con attenzione il sistema di sicurezza della tua azienda.</p></details>
+          <details name="svc"><summary><span class="n">04</span><span class="t">Virtualizzazione</span><span class="cat"><span class="tx">Servizi informatici</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">Semplifica e riduci i costi di implementazione e mantenimento dell’infrastruttura IT.</p></details>
+          <details name="svc"><summary><span class="n">05</span><span class="t">Software personalizzati</span><span class="cat"><span class="tx">Software</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">La nostra attività principale è la progettazione e lo sviluppo di software applicativo per le PMI: soluzioni su misura che superano i limiti dei prodotti standard e si integrano nel sistema informativo esistente. Analisi, progettazione e sviluppo, sempre condivisi con il Cliente.</p></details>
+          <details name="svc"><summary><span class="n">06</span><span class="t">Siti web ed e-commerce</span><span class="cat"><span class="tx">Software</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">Siti web moderni, veloci e performanti, ed e-commerce.</p></details>
+          <details name="svc"><summary><span class="n">07</span><span class="t">Cloud computing</span><span class="cat"><span class="tx">Servizi informatici</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">Servizi di cloud computing affidabili e personalizzabili.</p></details>
+          <details name="svc"><summary><span class="n">08</span><span class="t">Gestione documentale</span><span class="cat"><span class="tx">Servizi informatici</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">Servizi di gestione documentale per le imprese.</p></details>
           </div>
         </div>
         <div class="svc-group">
           <div class="svc-title"><span class="label">Robotica e automazione</span><span class="label">6</span></div>
           <div class="svc">
-          <details name="svc"><summary><span class="n">09</span><span class="t">Finitura</span><span class="cat">Robotica</span><span class="pl" aria-hidden="true"></span></summary><p class="more">Lucidatura e levigatura con un tocco specifico e delicato.</p></details>
-          <details name="svc"><summary><span class="n">10</span><span class="t">Asservimento macchine</span><span class="cat">Robotica</span><span class="pl" aria-hidden="true"></span></summary><p class="more">Gestisci le macchine e libera i dipendenti per compiti più preziosi.</p></details>
-          <details name="svc"><summary><span class="n">11</span><span class="t">Controllo qualità</span><span class="cat">Robotica</span><span class="pl" aria-hidden="true"></span></summary><p class="more">I bracci robotici collaborativi offrono precisione e coerenza.</p></details>
-          <details name="svc"><summary><span class="n">12</span><span class="t">Assemblaggio</span><span class="cat">Robotica</span><span class="pl" aria-hidden="true"></span></summary><p class="more">Processi di assemblaggio ripetibili e accurati.</p></details>
-          <details name="svc"><summary><span class="n">13</span><span class="t">Pallettizzazione</span><span class="cat">Robotica</span><span class="pl" aria-hidden="true"></span></summary><p class="more">Con i cobot meno rischio di lesioni e sforzi per i dipendenti.</p></details>
-          <details name="svc"><summary><span class="n">14</span><span class="t">Saldatura</span><span class="cat">Robotica</span><span class="pl" aria-hidden="true"></span></summary><p class="more">La saldatura robotizzata garantisce maggiore precisione e uniformità.</p></details>
+          <details name="svc"><summary><span class="n">09</span><span class="t">Finitura</span><span class="cat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="4" width="10" height="6" rx="2"/><path d="M12 10v4M4 18h16M6 15l-1.5 1.2M18 15l1.5 1.2"/></svg><span class="tx">Robotica</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">Lucidatura e levigatura con un tocco specifico e delicato.</p></details>
+          <details name="svc"><summary><span class="n">10</span><span class="t">Asservimento macchine</span><span class="cat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="13" width="9" height="8" rx="1"/><path d="M18 21v-8l-6-6"/><circle cx="12" cy="7" r="1.6"/><path d="M9.5 5l-2.5 1.2M9.5 5l-1 2.6"/></svg><span class="tx">Robotica</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">Gestisci le macchine e libera i dipendenti per compiti più preziosi.</p></details>
+          <details name="svc"><summary><span class="n">11</span><span class="t">Controllo qualità</span><span class="cat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5M8.5 11l2 2 3.5-4"/></svg><span class="tx">Robotica</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">I bracci robotici collaborativi offrono precisione e coerenza.</p></details>
+          <details name="svc"><summary><span class="n">12</span><span class="t">Assemblaggio</span><span class="cat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="11" width="9" height="9" rx="1"/><rect x="12" y="4" width="9" height="9" rx="1"/></svg><span class="tx">Robotica</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">Processi di assemblaggio ripetibili e accurati.</p></details>
+          <details name="svc"><summary><span class="n">13</span><span class="t">Pallettizzazione</span><span class="cat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 20h18"/><rect x="4" y="14" width="7" height="6"/><rect x="13" y="14" width="7" height="6"/><rect x="8.5" y="7" width="7" height="6"/></svg><span class="tx">Robotica</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">Con i cobot meno rischio di lesioni e sforzi per i dipendenti.</p></details>
+          <details name="svc"><summary><span class="n">14</span><span class="t">Saldatura</span><span class="cat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4l6 6M11 10l3 3M16 12l2-1.2M15 16l2 2M11.5 16v3M4 21h16"/></svg><span class="tx">Robotica</span></span><span class="pl" aria-hidden="true"></span></summary><p class="more">La saldatura robotizzata garantisce maggiore precisione e uniformità.</p></details>
           </div>
         </div>
       </div>
@@ -556,6 +587,31 @@
 
     <section class="section dark" id="azienda" aria-labelledby="azienda-titolo">
       <div class="ghost-word" aria-hidden="true"><span data-parallax-x>LD</span></div>
+      <div class="arm-art-wrap rise" aria-hidden="true"><svg class="arm-art" viewBox="0 0 520 440" aria-hidden="true" focusable="false">
+      <g class="ar-dim">
+        <path class="dr" pathLength="1" d="M20 410H500"/>
+        <path class="dr" pathLength="1" d="M210 60A270 270 0 0 1 480 330"/>
+        <ellipse class="dr" pathLength="1" cx="210" cy="392" rx="118" ry="13"/>
+        <path class="dr" pathLength="1" d="M150 290A66 66 0 0 1 255 276"/>
+        <path class="dr" pathLength="1" d="M292 196A52 52 0 0 1 358 150"/>
+        <path class="dr" pathLength="1" d="M410 126A38 38 0 0 1 468 118"/>
+        <path class="dr" pathLength="1" d="M20 430V410M20 410H0M500 430V410"/>
+      </g>
+      <rect class="ar-body dr" pathLength="1" x="130" y="392" width="160" height="18" rx="3"/>
+      <rect class="ar-body dr" pathLength="1" x="165" y="326" width="90" height="66" rx="8"/>
+      <g class="ar-l1">
+        <path class="ar-cap-o" d="M210 330L330 170"/><path class="ar-cap-i" d="M210 330L330 170"/>
+        <g class="ar-l2">
+          <path class="ar-cap-o ar-thin" d="M330 170L440 112"/><path class="ar-cap-i ar-thin" d="M330 170L440 112"/>
+          <circle class="ar-j" cx="440" cy="112" r="14"/><circle class="ar-dot" cx="440" cy="112" r="4"/>
+          <rect class="ar-body dr" pathLength="1" x="428" y="124" width="24" height="14" rx="3"/>
+          <path class="ar-body dr" pathLength="1" d="M431 138V172M449 138V172"/>
+        </g>
+        <circle class="ar-j" cx="330" cy="170" r="22"/><circle class="ar-dot" cx="330" cy="170" r="5"/>
+      </g>
+      <circle class="ar-j" cx="210" cy="330" r="30"/><circle class="ar-dot" cx="210" cy="330" r="6"/>
+      <g class="ar-txt"><text x="64" y="282">J2</text><text x="262" y="206">J3</text><text x="472" y="136">J4</text><text x="318" y="384">J1</text><text x="392" y="64">PORTATA</text></g>
+    </svg></div>
       <div class="wrap" style="position:relative;z-index:1">
         <div class="rule"><span class="label">Azienda</span><span class="label">Gravina in Puglia</span></div>
         <h2 class="display h-l" id="azienda-titolo" style="max-width:14ch">Un unico metodo, dal software al robot.</h2>
