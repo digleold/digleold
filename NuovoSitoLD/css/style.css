@@ -40,7 +40,8 @@ p { margin: 0 0 1em; color: var(--muted); }
 .section { padding: clamp(4rem, 10vw, 8rem) 0; position: relative; z-index: 1; }
 .eyebrow { display: inline-flex; align-items: center; gap: .6rem; font-size: .75rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.1rem; }
 .eyebrow::before { content: ""; width: 1.6rem; height: 2px; background: currentColor; }
-.grad { background: linear-gradient(100deg, var(--mint), var(--amber) 85%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.grad { background: linear-gradient(100deg, var(--mint), var(--amber) 50%, var(--mint)); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: aurora 9s linear infinite; }
+@keyframes aurora { to { background-position: -200% 0; } }
 .skip { position: absolute; left: -999px; top: 0; background: var(--accent); color: #000; padding: .5rem 1rem; z-index: 200; }
 .skip:focus { left: 0; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -361,3 +362,90 @@ html.dlg-open { overflow: hidden; }
 .brand { min-height: 2.75rem; }
 .link { display: inline-block; padding: .5rem 0; }
 .footer-inner nav a { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 .2rem; }
+
+
+/* ===== Effetti dinamici (porting in JS/CSS puri di componenti Magic UI) ===== */
+
+/* Rivelazione in prospettiva 3D: i blocchi si "alzano" ruotando sull'asse X */
+/* (la prospettiva e' dentro ogni elemento: un contenitore alto sposterebbe i contenuti sollevati) */
+.js .reveal:not(.tilt):not(.step) { transform: perspective(1600px) rotateX(10deg); transition: opacity .9s ease, translate .9s cubic-bezier(.2, .8, .2, 1), transform .9s cubic-bezier(.2, .8, .2, 1); }
+.js .reveal:not(.tilt):not(.step).in { transform: perspective(1600px) rotateX(0deg); }
+.js .reveal.tilt:not(.in) { --rx: 10deg; }
+.js .reveal.tilt { transition: opacity .9s ease, translate .9s cubic-bezier(.2, .8, .2, 1), transform .6s cubic-bezier(.2, .8, .2, 1), border-color .3s; }
+.js .reveal.tilt.live { transition: opacity .9s ease, translate .9s cubic-bezier(.2, .8, .2, 1), transform .08s linear, border-color .3s; }
+.js .step.reveal { transition: opacity .9s ease, translate .9s cubic-bezier(.2, .8, .2, 1), transform .6s cubic-bezier(.2, .8, .2, 1); }
+
+/* Bordo luminoso che gira attorno al blocco (Border Beam) */
+@property --beam-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.border-beam::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none;
+  background: conic-gradient(from var(--beam-a), transparent 0 70%, var(--mint) 86%, var(--amber) 96%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); animation: beamspin 7s linear infinite;
+}
+@keyframes beamspin { to { --beam-a: 360deg; } }
+
+/* Riflesso periodico sui pulsanti principali (Shimmer Button) */
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(110deg, transparent 32%, rgba(255, 255, 255, .6) 50%, transparent 68%); translate: -130% 0; animation: shimmer 5s ease-in-out infinite; }
+@keyframes shimmer { 0%, 60% { translate: -130% 0; } 100% { translate: 130% 0; } }
+.btn { transition: transform .25s, translate .35s cubic-bezier(.2, .8, .2, 1), box-shadow .25s, border-color .25s; }
+
+/* Luce che segue il cursore */
+.cursor-glow { position: fixed; left: 0; top: 0; width: 38rem; height: 38rem; margin: -19rem 0 0 -19rem; border-radius: 50%; pointer-events: none; z-index: 0; opacity: 0; transition: opacity .6s;
+  background: radial-gradient(circle, rgba(52, 225, 162, .11), rgba(247, 198, 0, .05) 40%, transparent 70%); will-change: transform; }
+.cursor-glow.on { opacity: 1; }
+
+/* Raggi di luce che convergono su LD (Animated Beam) */
+.beam-stage { position: relative; display: grid; grid-template-columns: 1fr auto 1fr; gap: clamp(1.6rem, 7vw, 7rem); align-items: center; padding: clamp(1.4rem, 4vw, 3.2rem); overflow: hidden; }
+.beam-col { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; position: relative; z-index: 2; }
+.node { --c: var(--mint); display: flex; align-items: center; gap: .8rem; padding: .85rem 1.1rem; border-radius: 14px; font-weight: 700; font-size: .92rem; line-height: 1.3; background: rgba(8, 12, 22, .92); border: 1px solid color-mix(in srgb, var(--c) 38%, transparent); transition: transform .3s, border-color .3s, box-shadow .3s; }
+.node.amber { --c: var(--amber); }
+.node:hover { transform: translateY(-3px) scale(1.02); border-color: var(--c); box-shadow: 0 12px 34px -14px var(--c); }
+.node svg { flex: none; width: 1.35rem; height: 1.35rem; fill: none; stroke: var(--c); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.beam-col.left .node { flex-direction: row-reverse; justify-content: flex-start; text-align: right; }
+.hub { position: relative; z-index: 2; display: grid; justify-items: center; gap: .35rem; text-align: center; }
+.hub strong { font-family: var(--display); font-weight: 600; font-size: 1rem; margin-top: .6rem; }
+.hub small { color: var(--amber); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: .68rem; }
+.hub-mark { position: relative; width: 7.2rem; height: 7.2rem; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 0 70px -8px var(--mint), 0 0 0 10px rgba(255, 255, 255, .05); }
+.hub-mark img { height: 4.6rem; width: auto; }
+.hub-mark::before, .hub-mark::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid var(--mint); opacity: 0; animation: hubping 3.4s ease-out infinite; }
+.hub-mark::after { border-color: var(--amber); animation-delay: 1.7s; }
+@keyframes hubping { 0% { transform: scale(1); opacity: .65; } 100% { transform: scale(2.1); opacity: 0; } }
+.beams { position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible; }
+.beams path { fill: none; stroke-linecap: round; }
+.beam-base { stroke-width: 1.5; opacity: .2; }
+.beam-glow, .beam-run { stroke-dasharray: 16 84; stroke-dashoffset: 16; animation: beamrun var(--dur, 5s) var(--delay, 0s) cubic-bezier(.16, 1, .3, 1) infinite; }
+.beam-glow { stroke-width: 7; opacity: .45; filter: url(#bglow); }
+.beam-run { stroke-width: 2.2; }
+@keyframes beamrun { from { stroke-dashoffset: 16; } to { stroke-dashoffset: -100; } }
+.beam-stage:not(.on) .beam-glow, .beam-stage:not(.on) .beam-run, .beam-stage:not(.on) .hub-mark::before, .beam-stage:not(.on) .hub-mark::after { animation-play-state: paused; }
+
+/* Testo gigante che accelera con lo scroll (Scroll Based Velocity) */
+.velocity { position: relative; z-index: 1; padding: clamp(1.5rem, 5vw, 3.5rem) 0; overflow: hidden; border-block: 1px solid var(--border); background: linear-gradient(180deg, rgba(10, 15, 28, .55), rgba(5, 7, 13, .2)); }
+.v-row { overflow: hidden; white-space: nowrap; }
+.v-track { display: inline-block; will-change: transform; font-family: var(--display); font-weight: 700; font-size: clamp(2.4rem, 8vw, 6.6rem); letter-spacing: -.03em; line-height: 1.2; color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, .3); }
+.v-row.v-fill .v-track { -webkit-text-stroke: 0; background: linear-gradient(100deg, var(--mint), var(--amber)); -webkit-background-clip: text; background-clip: text; }
+
+@media (max-width: 860px) {
+  .beam-stage { grid-template-columns: 1fr; gap: 2.6rem; }
+  .beam-col { grid-template-columns: 1fr 1fr; gap: .7rem; }
+  .beam-col .node, .beam-col.left .node { flex-direction: column; justify-content: center; text-align: center; gap: .4rem; padding: .8rem .6rem; font-size: .82rem; }
+  .hub-mark { width: 6rem; height: 6rem; } .hub-mark img { height: 3.8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal:not(.tilt):not(.step), .js .reveal:not(.tilt):not(.step).in { transform: none; }
+  .js .reveal.tilt:not(.in) { --rx: 0deg; }
+  .border-beam::after, .btn-primary::after, .hub-mark::before, .hub-mark::after, .grad { animation: none; }
+  .btn-primary::after { display: none; }
+  .beam-glow, .beam-run { animation: none; stroke-dasharray: none; opacity: .3; }
+  .cursor-glow { display: none; }
+}
+.border-beam { position: relative; }
+
+/* Su telefono la comparsa e' solo uno scorrimento: niente rotazione, niente rischio di sbordare */
+@media (max-width: 860px) {
+  .js .reveal:not(.tilt):not(.step), .js .reveal:not(.tilt):not(.step).in { transform: none; }
+  .js .reveal.tilt:not(.in) { --rx: 0deg; }
+}
+html, body { overflow-x: hidden; overflow-x: clip; }

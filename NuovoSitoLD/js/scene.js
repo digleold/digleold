@@ -78,6 +78,76 @@
   mesh(new T.BoxGeometry(0.2, 0.2, 0.2), glowM, payload);
   payload.add(new T.LineSegments(new T.EdgesGeometry(new T.BoxGeometry(0.3, 0.3, 0.3)), new T.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 })));
 
+  // ---------- Cella di lavoro: nastro + pallet, pick-and-place con cinematica inversa ----------
+  const cell = new T.Group(); arm.add(cell);
+  const PICK = { x: 2.9, z: 1.2 }, PLACE = { x: 0.6, z: -2.6 }, BELT_Y = 0.3;
+  mesh(new T.BoxGeometry(1.0, BELT_Y, 6.6), dark, cell, PICK.x, BELT_Y / 2, -0.2);
+  [-0.55, 0.55].forEach((s) => mesh(new T.BoxGeometry(0.06, 0.12, 6.6), glowM, cell, PICK.x + s, BELT_Y + 0.02, -0.2));
+  const stripes = [];
+  for (let i = 0; i < 12; i++) stripes.push(mesh(new T.BoxGeometry(0.84, 0.012, 0.07), new T.MeshBasicMaterial({ color: 0x34e1a2, transparent: true, opacity: 0.4 }), cell, PICK.x, BELT_Y + 0.008, 0));
+  mesh(new T.BoxGeometry(1.7, 0.14, 1.7), dark, cell, PLACE.x, 0.07, PLACE.z);
+  const palletEdges = new T.LineSegments(new T.EdgesGeometry(new T.BoxGeometry(1.7, 0.14, 1.7)), new T.LineBasicMaterial({ color: 0x34e1a2, transparent: true, opacity: 0.8 }));
+  palletEdges.position.set(PLACE.x, 0.07, PLACE.z); cell.add(palletEdges);
+  const crateGeo = new T.BoxGeometry(0.5, 0.5, 0.5), crateEdges = new T.EdgesGeometry(crateGeo);
+  const crateMat = new T.MeshStandardMaterial({ color: 0xf2b705, emissive: 0x7a5a00, emissiveIntensity: 0.55, metalness: 0.15, roughness: 0.5 });
+  const crateLine = new T.LineBasicMaterial({ color: 0x1a1405 });
+  const makeCrate = () => { const g = new T.Group(); g.add(new T.Mesh(crateGeo, crateMat)); g.add(new T.LineSegments(crateEdges, crateLine)); return g; };
+  const slots = [];
+  for (const layer of [0, 1]) for (const sx of [-0.4, 0.4]) for (const sz of [-0.4, 0.4]) slots.push({ x: PLACE.x + sx, y: 0.14 + 0.25 + layer * 0.5, z: PLACE.z + sz });
+
+  // Cinematica inversa piana a due bracci (gomito in alto) + rotazione della torretta; il polso resta verticale.
+  const L1 = 2.3, L2 = 2.0, HS = 1.02, TCP = 0.85; // lunghezze, altezza della spalla, distanza polso-centro presa
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const nearest = (a, ref) => a + Math.round((ref - a) / (Math.PI * 2)) * Math.PI * 2;
+  function solveIK(tx, ty, tz) {
+    const pu = Math.hypot(tx, tz), py = ty + TCP - HS;
+    const d = clamp(Math.hypot(pu, py), Math.abs(L1 - L2) + 0.001, L1 + L2 - 0.001);
+    const alpha = Math.atan2(pu, py);
+    const beta = Math.acos(clamp((L1 * L1 + d * d - L2 * L2) / (2 * L1 * d), -1, 1));
+    const th1 = alpha - beta;
+    const ang2 = Math.atan2(pu - L1 * Math.sin(th1), py - L1 * Math.cos(th1));
+    return { yaw: Math.atan2(tz, -tx), th1, th2: ang2 - th1, th3: Math.PI - ang2 };
+  }
+
+  // Sequenza del ciclo (9 s): [tempo, punto di presa, apertura pinza]
+  const CYC = 9;
+  const keyframes = (S) => {
+    const H = [1.0, 3.2, 0.5], PH = [PICK.x, 2.1, PICK.z], PD = [PICK.x, BELT_Y + 0.28, PICK.z];
+    const LH = [S.x, S.y + 1.8, S.z], LD = [S.x, S.y + 0.03, S.z];
+    return [[0, H, 0.46], [1.6, PH, 0.46], [2.5, PD, 0.46], [3.0, PD, 0.3], [3.9, PH, 0.3], [5.5, LH, 0.3], [6.4, LD, 0.3], [6.9, LD, 0.46], [7.6, LH, 0.46], [9.0, H, 0.46]];
+  };
+  const sstep = (a, b, x) => { const f = clamp((x - a) / (b - a), 0, 1); return f * f * (3 - 2 * f); };
+  let wt = 0, lastCycle = -1, crate = null, grabbed = false, released = false, slot = slots[0], yawIK = 0, beltV = 0;
+  const placed = [];
+  const clearCrates = () => { [crate, ...placed].forEach((c) => c && c.parent && c.parent.remove(c)); placed.length = 0; crate = null; };
+  const idQ = new T.Quaternion();
+  function workStep(dt, reduceMode) {
+    wt = reduceMode ? 4.2 : wt + dt;
+    const cyc = Math.floor(wt / CYC), c = wt % CYC;
+    if (cyc !== lastCycle) { // nuovo ciclo
+      lastCycle = cyc;
+      if (placed.length >= slots.length) { placed.forEach((p) => p.parent && p.parent.remove(p)); placed.length = 0; }
+      if (crate && !released) crate.parent.remove(crate);
+      slot = slots[placed.length];
+      crate = makeCrate(); crate.position.set(PICK.x, BELT_Y + 0.25, -3.2); cell.add(crate);
+      grabbed = released = false;
+    }
+    const kf = keyframes(slot);
+    let i = 0; while (i < kf.length - 2 && c > kf[i + 1][0]) i++;
+    const a = kf[i], b = kf[i + 1], f = sstep(a[0], b[0], c);
+    const tip = [a[1][0] + (b[1][0] - a[1][0]) * f, a[1][1] + (b[1][1] - a[1][1]) * f, a[1][2] + (b[1][2] - a[1][2]) * f];
+    const open = a[2] + (b[2] - a[2]) * f;
+    const damp = reduceMode ? 1 : 1 - Math.exp(-dt * 12);
+    if (!grabbed) { crate.position.z = -3.2 + (PICK.z + 3.2) * sstep(0, 1.2, c); }
+    if (!grabbed && c >= 3.0) { grabbed = true; wrist.attach(crate); }
+    if (grabbed && !released) { crate.position.lerp(new T.Vector3(0, 0.85, 0), damp); crate.quaternion.slerp(idQ, damp); }
+    if (grabbed && !released && c >= 6.9) { released = true; cell.attach(crate); crate.userData.target = new T.Vector3(slot.x, slot.y, slot.z); placed.push(crate); }
+    placed.forEach((p) => { p.position.lerp(p.userData.target, damp); p.quaternion.slerp(idQ, damp); });
+    beltV += ((c < 1.3 ? 1 : 0) - beltV) * (reduceMode ? 1 : 1 - Math.exp(-dt * 6));
+    return { ik: solveIK(tip[0], tip[1], tip[2]), open };
+  }
+  const beltPhase = { v: 0 };
+
   // Anelli e cubi orbitanti attorno al braccio
   const ringA = mesh(new T.TorusGeometry(2.3, 0.012, 8, 160), new T.MeshBasicMaterial({ color: 0x34e1a2, transparent: true, opacity: 0.65 }), arm, 0, 0.06, 0);
   ringA.rotation.x = Math.PI / 2;
@@ -130,15 +200,16 @@
   // ---------- Coreografia legata allo scroll ----------
   // ang/y/dist: orbita della camera; tx/ty: punto osservato; arm*: posizione e scala del braccio; net*: rete di nodi
   const K = [
-    { ang: 0.22, y: 3.2, dist: 11.5, tx: 1.0, ty: 2.1, armO: 1, armX: 3.4, armS: 0.72, armRY: -0.5, netX: -3.8, netY: 2.4, netS: 0.9, netO: 0.35 },   // 0 hero
-    { ang: -0.35, y: 3.4, dist: 12, tx: 0.6, ty: 1.9, armO: 0.38, armX: 4.2, armS: 0.62, armRY: 0.4, netX: -3.6, netY: 2.0, netS: 1.0, netO: 0.5 },       // 1 chi siamo
-    { ang: -0.75, y: 2.8, dist: 10.5, tx: 0.2, ty: 1.9, armO: 0.5, armX: 8.8, armS: 0.6, armRY: 1.2, netX: 2.8, netY: 2.0, netS: 1.45, netO: 1.0 },     // 2 servizi IT
-    { ang: 0.4, y: 2.8, dist: 10, tx: 0.2, ty: 2.1, armO: 1, armX: 2.9, armS: 0.95, armRY: -0.9, netX: -9, netY: 2.0, netS: 0.8, netO: 0.1 },         // 3 robotica
-    { ang: 0.0, y: 4.2, dist: 13, tx: 0, ty: 1.6, armO: 0.4, armX: 5.4, armS: 0.6, armRY: 0.2, netX: -5.0, netY: 2.0, netS: 0.9, netO: 0.45 },          // 4 metodo
-    { ang: 0.55, y: 3.6, dist: 13, tx: 0, ty: 1.6, armO: 0.4, armX: -5.2, armS: 0.6, armRY: 0.8, netX: 5.2, netY: 2.2, netS: 0.9, netO: 0.35 },         // 5 partner e progetti
-    { ang: 0.0, y: 3.4, dist: 12, tx: 0.4, ty: 1.9, armO: 0.55, armX: 4.0, armS: 0.8, armRY: -0.3, netX: -4.0, netY: 2.2, netS: 1.0, netO: 0.6 },        // 6 contatti
-    { ang: -0.25, y: 3.0, dist: 11.5, tx: 0.4, ty: 2.0, armO: 0.5, armX: 5.6, armS: 0.7, armRY: 0.6, netX: -9, netY: 2.0, netS: 0.8, netO: 0.1 },       // 7 vantaggi cobot
-    { ang: 0.3, y: 3.4, dist: 12.5, tx: 0, ty: 1.8, armO: 0.45, armX: 7.0, armS: 0.55, armRY: -0.6, netX: -9, netY: 2.0, netS: 0.8, netO: 0.1 },         // 8 tecnologie
+    { ang: 0.22, y: 3.2, dist: 11.5, tx: 1.0, ty: 2.1, work: 0, armO: 1, armX: 3.4, armS: 0.72, armRY: -0.5, netX: -3.8, netY: 2.4, netS: 0.9, netO: 0.35 },   // 0 hero
+    { ang: -0.35, y: 3.4, dist: 12, tx: 0.6, ty: 1.9, work: 0, armO: 0.38, armX: 4.2, armS: 0.62, armRY: 0.4, netX: -3.6, netY: 2.0, netS: 1.0, netO: 0.5 },       // 1 chi siamo
+    { ang: -0.75, y: 2.8, dist: 10.5, tx: 0.2, ty: 1.9, work: 0, armO: 0.5, armX: 8.8, armS: 0.6, armRY: 1.2, netX: 2.8, netY: 2.0, netS: 1.45, netO: 1.0 },     // 2 servizi IT
+    { ang: 0.4, y: 2.8, dist: 11.2, tx: 0.4, ty: 1.9, work: 1, armO: 1, armX: 2.7, armS: 0.7, armRY: -0.9, netX: -9, netY: 2.0, netS: 0.8, netO: 0.1 },         // 3 robotica
+    { ang: 0.0, y: 4.2, dist: 13, tx: 0, ty: 1.6, work: 0, armO: 0.4, armX: 5.4, armS: 0.6, armRY: 0.2, netX: -5.0, netY: 2.0, netS: 0.9, netO: 0.45 },          // 4 metodo
+    { ang: 0.55, y: 3.6, dist: 13, tx: 0, ty: 1.6, work: 0, armO: 0.4, armX: -5.2, armS: 0.6, armRY: 0.8, netX: 5.2, netY: 2.2, netS: 0.9, netO: 0.35 },         // 5 partner e progetti
+    { ang: 0.0, y: 3.4, dist: 12, tx: 0.4, ty: 1.9, work: 0, armO: 0.55, armX: 4.0, armS: 0.8, armRY: -0.3, netX: -4.0, netY: 2.2, netS: 1.0, netO: 0.6 },        // 6 contatti
+    { ang: -0.25, y: 3.0, dist: 12, tx: 0.4, ty: 2.0, work: 1, armO: 0.5, armX: 3.9, armS: 0.6, armRY: 0.6, netX: -9, netY: 2.0, netS: 0.8, netO: 0.1 },       // 7 vantaggi cobot
+    { ang: 0.3, y: 3.4, dist: 12.5, tx: 0, ty: 1.8, work: 0, armO: 0.45, armX: 7.0, armS: 0.55, armRY: -0.6, netX: -9, netY: 2.0, netS: 0.8, netO: 0.1 },         // 8 tecnologie
+    { ang: 0.0, y: 3.2, dist: 12, tx: 0, ty: 1.9, work: 0, armO: 0.16, armX: 8.2, armS: 0.6, armRY: 0.3, netX: -0.6, netY: 2.3, netS: 1.5, netO: 0.85 },   // 9 un solo partner
   ];
   const keyed = [...document.querySelectorAll('[data-key]')].map((el) => ({ el, k: Number(el.dataset.key) }));
   const cur = { ...K[0] };
@@ -194,13 +265,26 @@
     for (const m of armMats) m.opacity = m.userData.base * cur.armO;
     arm.position.set(cur.armX * (narrow ? 0.15 : 1), 0, 0);
     arm.scale.setScalar(Math.max(0.001, cur.armS * intro * (narrow ? 0.8 : 1)));
-    arm.rotation.y = cur.armRY + t * 0.05;
-    turret.rotation.y = Math.sin(t * 0.45) * 0.7 + mouse.sx * 0.6;
-    shoulder.rotation.z = 0.28 + Math.sin(t * 0.7) * 0.22 + mouse.sy * 0.25;
-    elbow.rotation.z = -0.95 + Math.sin(t * 0.9 + 1.0) * 0.32 - mouse.sy * 0.2;
-    wrist.rotation.z = 0.55 + Math.sin(t * 1.3) * 0.3;
-    const open = 0.17 + (Math.sin(t * 1.8) * 0.5 + 0.5) * 0.1;
+    const w = cur.work;
+    arm.rotation.y = cur.armRY + t * 0.05 * (1 - w);
+    let yaw = Math.sin(t * 0.45) * 0.7 + mouse.sx * 0.6;
+    let s1 = 0.28 + Math.sin(t * 0.7) * 0.22 + mouse.sy * 0.25;
+    let e2 = -0.95 + Math.sin(t * 0.9 + 1.0) * 0.32 - mouse.sy * 0.2;
+    let w3 = 0.55 + Math.sin(t * 1.3) * 0.3;
+    let open = 0.17 + (Math.sin(t * 1.8) * 0.5 + 0.5) * 0.1;
+    cell.visible = w > 0.01; cell.scale.setScalar(Math.max(0.001, w));
+    if (w > 0.01) {
+      if (w < 0.05 && !reduce && wt > 0) { clearCrates(); wt = 0; lastCycle = -1; }
+      const r = workStep(reduce ? 0.016 : dt, reduce);
+      yawIK = nearest(r.ik.yaw, yawIK);
+      const yIdle = yaw, yTarget = nearest(yawIK, yIdle);
+      yaw = yIdle + (yTarget - yIdle) * w; s1 += (r.ik.th1 - s1) * w; e2 += (r.ik.th2 - e2) * w; w3 += (r.ik.th3 - w3) * w; open += (r.open - open) * w;
+      beltPhase.v += beltV * dt * 2.2;
+      stripes.forEach((s, i) => { s.position.z = (((i / stripes.length) * 6.6 + beltPhase.v) % 6.6) - 3.5; });
+    } else if (wt > 0) { clearCrates(); wt = 0; lastCycle = -1; }
+    turret.rotation.y = yaw; shoulder.rotation.z = s1; elbow.rotation.z = e2; wrist.rotation.z = w3;
     fL.position.x = -open; fR.position.x = open;
+    payload.visible = w < 0.5;
     payload.rotation.y = t * 1.2; payload.rotation.x = t * 0.7;
     ringA.rotation.z = t * 0.2; ringB.rotation.z = -t * 0.14;
     orbit.rotation.y = t * 0.18;

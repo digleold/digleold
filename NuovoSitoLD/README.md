@@ -54,3 +54,14 @@ a un servizio di form.
 ## Responsive
 
 Menu a tendina fino a 1000px, griglie a 4/2/1 colonne, telefoni in orizzontale, zone sicure (notch), schermi 2K/4K (la base dei font cresce), aree di tocco di almeno 44px, effetti 3D delle card solo con mouse.
+
+## Effetti dinamici e 3D
+
+- **Fondale 3D** (`js/scene.js`, Three.js r128): braccio robotico che segue il mouse, rete di nodi, cubi orbitanti, camera guidata dallo scroll.
+- **Pick-and-place**: nella sezione robotica il braccio prende le casse da un nastro e le impila su un pallet. Cinematica inversa a due bracci con polso sempre verticale, ciclo di 9 secondi, pallet che si svuota dopo 8 casse.
+- **Raggi di luce** (sezione "Un solo partner"): porting in JavaScript puro dell'*Animated Beam* di Magic UI. Percorsi curvi misurati nel DOM e ricalcolati al ridimensionamento, raggio che scorre con ease out expo.
+- **Testo a velocita' variabile** (fascia tra Servizi e Robotica): porting dello *Scroll Based Velocity* di Magic UI. Due righe in direzioni opposte che accelerano e si invertono con la velocita' di scroll.
+- **Altri effetti**: bordo luminoso rotante (*Border Beam*), riflesso periodico sui pulsanti, testo con gradiente scorrevole, luce che segue il cursore, pulsanti magnetici, card inclinabili in 3D, comparsa in prospettiva.
+- Tutti gli effetti rispettano "riduci movimento"; cursore e pulsanti magnetici solo con mouse; la rotazione di comparsa e' disattivata su telefono.
+
+I componenti Magic UI sono distribuiti con licenza MIT; il codice qui e' una riscrittura senza React ne framer-motion.
