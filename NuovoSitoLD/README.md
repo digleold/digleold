@@ -1,7 +1,7 @@
 # NuovoSitoLD
 
-Sito di **LD Technologies SRL**: servizi informatici, sviluppo software, gestione documentale,
-cloud, sicurezza e robotica collaborativa. Pagina unica con fondale 3D.
+Sito di **LD Technologies SRL**: servizi informatici, sviluppo software, gestione documentale, cloud, sicurezza e
+robotica collaborativa. Pagina unica, stile editoriale minimale (bianco, nero e grigi, titoli enormi e compatti).
 
 ## Avvio in locale
 
@@ -14,63 +14,44 @@ Poi apri http://localhost:8000.
 
 ## Struttura
 
-- `index.html` - pagina unica: home, chi siamo, servizi IT, robotica, metodo, progetti (portfolio filtrabile con schede di dettaglio), partner (schede prodotto), contatti
-- `css/style.css` - stili, variabili colore, effetti 3D CSS (card inclinabili, anello partner, passi in prospettiva)
-- `js/scene.js` - fondale 3D con Three.js r128 (braccio robotico + rete di nodi), guidato da scroll e mouse
-- `js/main.js` - menu mobile, animazioni allo scroll, contatori, inclinazione 3D delle card, modulo
-- `img/` - loghi e foto dei partner
+- `index.html` - pagina unica: apertura, settori, cella robotica 3D, cosa facciamo, servizi, lavori selezionati,
+  archivio progetti filtrabile, azienda, storie dei clienti, partner, FAQ, contatti, footer.
+- `css/style.css` - stile completo (variabili in `:root`).
+- `js/main.js` - scorrimento morbido, testo che si riempie con lo scroll, parallasse, contatori, filtri, finestre di dettaglio, menu, modulo.
+- `js/robot.js` - cella robotica 3D (Three.js r128) con pick-and-place e cinematica inversa; si carica solo quando ci si avvicina.
+- `js/vendor/lenis.min.js` - Lenis 1.3.23 (licenza MIT), scorrimento morbido.
+- `img/` - loghi, schermate dei progetti, foto dei partner (WebP).
+- `404.html`, `robots.txt`, `sitemap.xml`, `site.webmanifest`, icone.
 
-Three.js viene caricato da cdnjs (versione fissa r128). Se WebGL non e disponibile il sito
-resta pienamente utilizzabile con uno sfondo a gradiente. Con "riduci movimento" attivo nel
-sistema le animazioni si fermano.
+## Stile
 
-## Pubblicazione su GitHub Pages
+Ispirato allo stile editoriale di studi di design contemporanei: fondo bianco con una sezione nera, carattere Inter
+(titoli con spaziatura molto stretta), etichette maiuscole piccole, pulsanti a pillola, elenchi con linee sottili,
+parole enormi, testata che si inverte sui fondi scuri, wordmark gigante nel footer. Un solo accento di colore (verde menta)
+usato con parsimonia. I contenuti e il codice sono originali; nessun testo o immagine del sito di riferimento e' stato copiato.
 
-Il workflow `.github/workflows/pages.yml` pubblica la cartella `NuovoSitoLD` ad ogni push
-sul branch predefinito. Attivazione una tantum: Settings > Pages > Source: **GitHub Actions**.
-Il sito sara su `https://digleold.github.io/digleold/` (percorsi relativi).
+## Accessibilita e movimento
 
-## Dati aziendali
-
-LD Technologies SRL - Via Enrico Fermi snc, 70024 Gravina in Puglia (BA) - P.IVA 08921740729.
-Testi, loghi e contatti provengono da ldtechnologies.it e ldrobotics.it. Le sezioni di esempio
-dei template WordPress originali (team fittizio, articoli demo, premi) non sono state riportate.
-Le foto in `img/partner-*` provengono da ldrobotics.it e sono dei rispettivi produttori
-(Universal Robots, Dobot, MiR, Microsoft, Robotiq, JAKA, ABB).
-
-Il modulo contatti apre il programma di posta (`mailto:`); per un invio diretto va collegato
-a un servizio di form.
+Rispetta "riduci movimento" del sistema; il pulsante "Riduci animazioni" nel footer ferma scorrimento morbido, parallasse e
+animazioni e ricorda la scelta. Contrasti verificati (minimo 4,95:1), aree di tocco di almeno 44px, navigazione da tastiera,
+`<details>` nativi per servizi e FAQ.
 
 ## SEO e prestazioni
 
-- Titolo e description ottimizzati, canonical, Open Graph e Twitter Card (`img/og-image.jpg`, 1200x630).
-- Dati strutturati Schema.org (JSON-LD): organizzazione/attivita locale con indirizzo, P.IVA, contatti e catalogo servizi; sito web; pagina; FAQ.
-- Sezione FAQ visibile (8 domande) allineata ai dati strutturati.
-- `robots.txt`, `sitemap.xml`, `site.webmanifest`, icone (favicon, apple-touch, 192/512), pagina `404.html`.
-- Dominio di destinazione usato in canonical, sitemap e Open Graph: **https://www.ldtechnologies.it/**. Se cambia, aggiornare `index.html`, `robots.txt` e `sitemap.xml`.
-- Immagini in WebP con `width`/`height`; Three.js caricato dopo il caricamento della pagina e solo su dispositivi adatti; font non bloccanti con ripiego calibrato.
-- Misure Lighthouse (mobile, rete lenta simulata): Prestazioni 97, Accessibilita 100, Best Practices 96, SEO 100, CLS 0,004.
+- Title/description, canonical, Open Graph e Twitter Card (`img/og-image.jpg`, 1200x630), JSON-LD (attivita locale, sito, pagina, FAQ).
+- Dominio di destinazione in canonical, sitemap e Open Graph: **https://www.ldtechnologies.it/**. Se cambia, aggiornare `index.html`, `robots.txt` e `sitemap.xml`.
+- Immagini WebP con `width`/`height`; Three.js non nell'HTML (si scarica solo vicino al riquadro 3D); font non bloccanti con ripiego calibrato.
+- Lighthouse (mobile, rete lenta simulata, con compressione): Prestazioni 99, Accessibilita 100, Best Practices 96, SEO 100, CLS 0,001.
 
-## Responsive
+## Pubblicazione su GitHub Pages
 
-Menu a tendina fino a 1000px, griglie a 4/2/1 colonne, telefoni in orizzontale, zone sicure (notch), schermi 2K/4K (la base dei font cresce), aree di tocco di almeno 44px, effetti 3D delle card solo con mouse.
+Il workflow `.github/workflows/pages.yml` pubblica la cartella `NuovoSitoLD` ad ogni push sul branch predefinito.
+Attivazione una tantum: Settings > Pages > Source: **GitHub Actions**. Sito su `https://digleold.github.io/digleold/` (percorsi relativi).
 
-## Effetti dinamici e 3D
+## Dati aziendali e contenuti
 
-- **Fondale 3D** (`js/scene.js`, Three.js r128): braccio robotico che segue il mouse, rete di nodi, cubi orbitanti, camera guidata dallo scroll.
-- **Pick-and-place**: nella sezione robotica il braccio prende le casse da un nastro e le impila su un pallet. Cinematica inversa a due bracci con polso sempre verticale, ciclo di 9 secondi, pallet che si svuota dopo 8 casse.
-- **Raggi di luce** (sezione "Un solo partner"): porting in JavaScript puro dell'*Animated Beam* di Magic UI. Percorsi curvi misurati nel DOM e ricalcolati al ridimensionamento, raggio che scorre con ease out expo.
-- **Testo a velocita' variabile** (fascia tra Servizi e Robotica): porting dello *Scroll Based Velocity* di Magic UI. Due righe in direzioni opposte che accelerano e si invertono con la velocita' di scroll.
-- **Altri effetti**: bordo luminoso rotante (*Border Beam*), riflesso periodico sui pulsanti, testo con gradiente scorrevole, luce che segue il cursore, pulsanti magnetici, card inclinabili in 3D, comparsa in prospettiva.
-- Tutti gli effetti rispettano "riduci movimento"; cursore e pulsanti magnetici solo con mouse; la rotazione di comparsa e' disattivata su telefono.
-
-I componenti Magic UI sono distribuiti con licenza MIT; il codice qui e' una riscrittura senza React ne framer-motion.
-
-## Rifinitura professionale
-
-- **Lettura prima di tutto**: un velo morbido dietro le sezioni di testo tiene il fondale 3D presente ma non invadente; il braccio compare solo in apertura e nella sezione robotica.
-- **Fiducia**: telefono sempre visibile in testata, striscia "Hanno scelto LD" subito dopo l'apertura, contatti in scheda ordinata (sede, P.IVA, telefono, email), footer completo.
-- **Gerarchia**: titoli delle card in Manrope 800 (il font largo resta per titoli di sezione e numeri), etichette piu' leggibili, ritmo verticale piu' compatto, titoli dal tono piu' sobrio.
-- **Meno effetti, piu' effetto**: riflesso solo sul pulsante principale dell'apertura, nessun gradiente animato nei titoli, niente pulsanti magnetici; restano 3D, raggi di luce, fascia a scorrimento e bordi luminosi.
-- **Controllo delle animazioni**: il pulsante "Riduci animazioni" nel footer ferma i movimenti decorativi (come "riduci movimento" del sistema), ricorda la scelta e si puo' riattivare.
-- **Prestazioni**: il testo dell'apertura appare subito (LCP da 3,0 a 1,4 s nella simulazione mobile con compressione).
+LD Technologies SRL - Via Enrico Fermi snc, 70024 Gravina in Puglia (BA) - P.IVA 08921740729.
+Testi, loghi e contatti provengono da ldtechnologies.it e ldrobotics.it; le sezioni di esempio dei template WordPress originali
+non sono state riportate. Le foto `img/partner-*` provengono da ldrobotics.it e sono dei rispettivi produttori
+(Universal Robots, Dobot, MiR, Microsoft, Robotiq, JAKA, ABB).
+Il modulo contatti apre il programma di posta (`mailto:`); per un invio diretto va collegato a un servizio di form.
