@@ -11,15 +11,21 @@
   const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const isCalm = () => motionQuery.matches || document.documentElement.dataset.motion === 'calm';
 
-  const THREE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-  const idle = (fn) => (window.requestIdleCallback ? window.requestIdleCallback(fn, { timeout: 2000 }) : setTimeout(fn, 400));
+  // Three.js r128 (MIT) e' incorporato nel sito: nessuna richiesta a server di terzi.
+  const SRC = (document.currentScript && document.currentScript.src) || '';
+  const THREE_URL = SRC ? new URL('vendor/three.min.js', SRC).href : 'js/vendor/three.min.js';
+  // Parte dopo il caricamento della pagina e un breve respiro: la foto resta visibile e il thread principale resta libero per il testo.
+  const idle = (fn) => {
+    const go = () => setTimeout(() => (window.requestIdleCallback ? window.requestIdleCallback(fn, { timeout: 3000 }) : fn()), 1500);
+    if (document.readyState === 'complete') go(); else window.addEventListener('load', go, { once: true });
+  };
   const boot = () => {
     if (window.THREE) { init(window.THREE); return; }
     const s = document.createElement('script'); s.src = THREE_URL; s.async = true;
     s.onload = () => init(window.THREE); document.head.appendChild(s);
   };
   if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((en) => { if (en[0].isIntersecting) { io.disconnect(); idle(boot); } }, { rootMargin: '700px 0px' });
+    const io = new IntersectionObserver((en) => { if (en[0].isIntersecting) { io.disconnect(); idle(boot); } }, { rootMargin: '900px 0px' });
     io.observe(host);
   } else idle(boot);
 
@@ -47,7 +53,7 @@
     const graphite = new T.MeshStandardMaterial({ color: 0x16161a, metalness: 0.3, roughness: 0.5 });
     const mint = new T.MeshStandardMaterial({ color: 0x34e1a2, emissive: 0x1ea876, emissiveIntensity: 0.3, roughness: 0.4 });
     const pallet = new T.MeshStandardMaterial({ color: 0xd3d3d9, roughness: 0.8 });
-    const crateMat = new T.MeshStandardMaterial({ color: 0x1b1b20, roughness: 0.55, metalness: 0.1 });
+    const crateMat = new T.MeshStandardMaterial({ color: 0xf7c600, roughness: 0.5, metalness: 0.05 });
 
     const root = new T.Group(); scene.add(root);
     const arm = new T.Group(); root.add(arm);
@@ -156,9 +162,9 @@
       turret.rotation.y = yawIK; shoulder.rotation.z = r.ik.th1; elbow.rotation.z = r.ik.th2; wrist.rotation.z = r.ik.th3;
       fL.position.x = -(r.open + 0.13); fR.position.x = r.open + 0.13;
 
-      const aspect = camera.aspect, dist = 12.6 * clamp(1.75 / aspect, 0.92, 1.7);
+      const aspect = camera.aspect, dist = aspect >= 1.4 ? 12.6 : clamp(10.6 * Math.pow(1.4 / aspect, 0.62), 10.6, 18);
       const ang = 0.5 + mouse.sx * 0.28, elev = 4.6 - mouse.sy * 1.2;
-      const target = new T.Vector3(1.2, 1.35 + (aspect < 1 ? 0.5 : 0), -0.5);
+      const target = new T.Vector3(1.15, 1.2 + (aspect < 1.1 ? 0.35 : 0), -0.55);
       camera.position.set(target.x + Math.sin(ang) * dist, target.y + elev, target.z + Math.cos(ang) * dist);
       camera.lookAt(target);
       root.scale.setScalar(0.9 + 0.1 * e); root.position.y = -0.4 * (1 - e);

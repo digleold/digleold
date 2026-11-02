@@ -4,6 +4,9 @@
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
   const isCalm = () => mq.matches || html.dataset.motion === 'calm';
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const EN = html.lang === 'en';
+  const TXT = EN ? { menu: 'Menu', close: 'Close', subject: 'Information request from the website', name: 'Name', email: 'Email' }
+                 : { menu: 'Menu', close: 'Chiudi', subject: 'Richiesta informazioni dal sito', name: 'Nome', email: 'Email' };
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
@@ -41,14 +44,14 @@
   const menu = $('#menu'), menuBtn = $('.menu-btn');
   function closeMenu() {
     if (!menu || !menu.classList.contains('open')) return;
-    menu.classList.remove('open'); menu.setAttribute('aria-hidden', 'true'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.textContent = 'Menu';
+    menu.classList.remove('open'); if (header) header.classList.remove('menu-open'); menu.setAttribute('aria-hidden', 'true'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.textContent = TXT.menu;
     if (lenis) lenis.start(); else html.style.overflow = '';
   }
   if (menu && menuBtn) {
     menuBtn.addEventListener('click', () => {
       const open = !menu.classList.contains('open');
       if (!open) { closeMenu(); return; }
-      menu.classList.add('open'); menu.setAttribute('aria-hidden', 'false'); menuBtn.setAttribute('aria-expanded', 'true'); menuBtn.textContent = 'Chiudi';
+      menu.classList.add('open'); if (header) header.classList.add('menu-open'); menu.setAttribute('aria-hidden', 'false'); menuBtn.setAttribute('aria-expanded', 'true'); menuBtn.textContent = TXT.close;
       if (lenis) lenis.stop(); else html.style.overflow = 'hidden';
     });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
@@ -68,6 +71,9 @@
     el.append(sr, vis); el.classList.add('rv', 'on');
     return { el, words, visible: false, load: el.hasAttribute('data-rv-load'), last: -1 };
   });
+  // Mostra il titolo solo quando le parole sono divise e il font e' arrivato (o dopo 1,2 s al massimo)
+  const showReady = () => html.classList.add('ready');
+  if (document.fonts && document.fonts.ready) Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1200))]).then(showReady); else showReady();
   const setWords = (r, p) => {
     const n = r.words.length;
     r.words.forEach((w, i) => { const v = clamp(p * n - i, 0, 1); w.style.setProperty('--p', v.toFixed(3)); });
@@ -88,10 +94,13 @@
   const par = $$('[data-parallax]');
   const parX = $$('[data-parallax-x]');
   const bar = $('.progress');
+  const header = $('.site-header');
+  const darks = $$('.dark, .site-footer');
   let ticking = false;
   const update = () => {
     ticking = false;
     const vh = window.innerHeight, y = window.scrollY, calm = isCalm();
+    if (header) { const hy = 36; header.classList.toggle('on-dark', darks.some((el) => { const r = el.getBoundingClientRect(); return r.top <= hy && r.bottom >= hy; })); }
     if (bar) { const h = document.documentElement.scrollHeight - vh; bar.style.transform = `scaleX(${h > 0 ? clamp(y / h, 0, 1) : 0})`; }
     if (calm) return;
     rv.forEach((r) => {
@@ -182,8 +191,8 @@
     e.preventDefault();
     if (!form.reportValidity()) return;
     const d = new FormData(form);
-    const subject = encodeURIComponent('Richiesta informazioni dal sito');
-    const body = encodeURIComponent(`Nome: ${d.get('nome')}\nEmail: ${d.get('email')}\n\n${d.get('messaggio')}`);
+    const subject = encodeURIComponent(TXT.subject);
+    const body = encodeURIComponent(`${TXT.name}: ${d.get('nome')}\n${TXT.email}: ${d.get('email')}\n\n${d.get('messaggio')}`);
     window.location.href = `mailto:${d.get('argomento')}?subject=${subject}&body=${body}`;
   });
 
