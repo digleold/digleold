@@ -65,3 +65,12 @@ Menu a tendina fino a 1000px, griglie a 4/2/1 colonne, telefoni in orizzontale, 
 - Tutti gli effetti rispettano "riduci movimento"; cursore e pulsanti magnetici solo con mouse; la rotazione di comparsa e' disattivata su telefono.
 
 I componenti Magic UI sono distribuiti con licenza MIT; il codice qui e' una riscrittura senza React ne framer-motion.
+
+## Rifinitura professionale
+
+- **Lettura prima di tutto**: un velo morbido dietro le sezioni di testo tiene il fondale 3D presente ma non invadente; il braccio compare solo in apertura e nella sezione robotica.
+- **Fiducia**: telefono sempre visibile in testata, striscia "Hanno scelto LD" subito dopo l'apertura, contatti in scheda ordinata (sede, P.IVA, telefono, email), footer completo.
+- **Gerarchia**: titoli delle card in Manrope 800 (il font largo resta per titoli di sezione e numeri), etichette piu' leggibili, ritmo verticale piu' compatto, titoli dal tono piu' sobrio.
+- **Meno effetti, piu' effetto**: riflesso solo sul pulsante principale dell'apertura, nessun gradiente animato nei titoli, niente pulsanti magnetici; restano 3D, raggi di luce, fascia a scorrimento e bordi luminosi.
+- **Controllo delle animazioni**: il pulsante "Riduci animazioni" nel footer ferma i movimenti decorativi (come "riduci movimento" del sistema), ricorda la scelta e si puo' riattivare.
+- **Prestazioni**: il testo dell'apertura appare subito (LCP da 3,0 a 1,4 s nella simulazione mobile con compressione).

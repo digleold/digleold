@@ -24,7 +24,9 @@
 
   function init(T) {
   if (!T) { document.body.classList.add('no-3d'); return; }
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const isCalm = () => motionQuery.matches || document.documentElement.dataset.motion === 'calm';
+  let reduce = isCalm();
 
   let renderer;
   try {
@@ -201,15 +203,16 @@
   // ang/y/dist: orbita della camera; tx/ty: punto osservato; arm*: posizione e scala del braccio; net*: rete di nodi
   const K = [
     { ang: 0.22, y: 3.2, dist: 11.5, tx: 1.0, ty: 2.1, work: 0, armO: 1, armX: 3.4, armS: 0.72, armRY: -0.5, netX: -3.8, netY: 2.4, netS: 0.9, netO: 0.35 },   // 0 hero
-    { ang: -0.35, y: 3.4, dist: 12, tx: 0.6, ty: 1.9, work: 0, armO: 0.38, armX: 4.2, armS: 0.62, armRY: 0.4, netX: -3.6, netY: 2.0, netS: 1.0, netO: 0.5 },       // 1 chi siamo
-    { ang: -0.75, y: 2.8, dist: 10.5, tx: 0.2, ty: 1.9, work: 0, armO: 0.5, armX: 8.8, armS: 0.6, armRY: 1.2, netX: 2.8, netY: 2.0, netS: 1.45, netO: 1.0 },     // 2 servizi IT
+    { ang: -0.35, y: 3.4, dist: 12, tx: 0.6, ty: 1.9, work: 0, armO: 0, armX: 4.2, armS: 0.62, armRY: 0.4, netX: -3.6, netY: 2.0, netS: 1.0, netO: 0.3 },       // 1 chi siamo
+    { ang: -0.75, y: 2.8, dist: 10.5, tx: 0.2, ty: 1.9, work: 0, armO: 0, armX: 8.8, armS: 0.6, armRY: 1.2, netX: 2.8, netY: 2.0, netS: 1.45, netO: 0.55 },     // 2 servizi IT
     { ang: 0.4, y: 2.8, dist: 11.2, tx: 0.4, ty: 1.9, work: 1, armO: 1, armX: 2.7, armS: 0.7, armRY: -0.9, netX: -9, netY: 2.0, netS: 0.8, netO: 0.1 },         // 3 robotica
-    { ang: 0.0, y: 4.2, dist: 13, tx: 0, ty: 1.6, work: 0, armO: 0.4, armX: 5.4, armS: 0.6, armRY: 0.2, netX: -5.0, netY: 2.0, netS: 0.9, netO: 0.45 },          // 4 metodo
-    { ang: 0.55, y: 3.6, dist: 13, tx: 0, ty: 1.6, work: 0, armO: 0.4, armX: -5.2, armS: 0.6, armRY: 0.8, netX: 5.2, netY: 2.2, netS: 0.9, netO: 0.35 },         // 5 partner e progetti
-    { ang: 0.0, y: 3.4, dist: 12, tx: 0.4, ty: 1.9, work: 0, armO: 0.55, armX: 4.0, armS: 0.8, armRY: -0.3, netX: -4.0, netY: 2.2, netS: 1.0, netO: 0.6 },        // 6 contatti
-    { ang: -0.25, y: 3.0, dist: 12, tx: 0.4, ty: 2.0, work: 1, armO: 0.5, armX: 3.9, armS: 0.6, armRY: 0.6, netX: -9, netY: 2.0, netS: 0.8, netO: 0.1 },       // 7 vantaggi cobot
-    { ang: 0.3, y: 3.4, dist: 12.5, tx: 0, ty: 1.8, work: 0, armO: 0.45, armX: 7.0, armS: 0.55, armRY: -0.6, netX: -9, netY: 2.0, netS: 0.8, netO: 0.1 },         // 8 tecnologie
-    { ang: 0.0, y: 3.2, dist: 12, tx: 0, ty: 1.9, work: 0, armO: 0.16, armX: 8.2, armS: 0.6, armRY: 0.3, netX: -0.6, netY: 2.3, netS: 1.5, netO: 0.85 },   // 9 un solo partner
+    { ang: 0.0, y: 4.2, dist: 13, tx: 0, ty: 1.6, work: 0, armO: 0, armX: 5.4, armS: 0.6, armRY: 0.2, netX: -5.0, netY: 2.0, netS: 0.9, netO: 0.28 },          // 4 metodo
+    { ang: 0.55, y: 3.6, dist: 13, tx: 0, ty: 1.6, work: 0, armO: 0, armX: -5.2, armS: 0.6, armRY: 0.8, netX: 5.2, netY: 2.2, netS: 0.9, netO: 0.28 },         // 5 partner e progetti
+    { ang: 0.0, y: 3.4, dist: 12, tx: 0.4, ty: 1.9, work: 0, armO: 0, armX: 4.0, armS: 0.8, armRY: -0.3, netX: -4.0, netY: 2.2, netS: 1.0, netO: 0.35 },        // 6 contatti
+    { ang: -0.25, y: 3.0, dist: 12, tx: 0.4, ty: 2.0, work: 1, armO: 0.4, armX: 3.9, armS: 0.6, armRY: 0.6, netX: -9, netY: 2.0, netS: 0.8, netO: 0.1 },       // 7 vantaggi cobot
+    { ang: 0.3, y: 3.4, dist: 12.5, tx: 0, ty: 1.8, work: 0, armO: 0, armX: 7.0, armS: 0.55, armRY: -0.6, netX: -9, netY: 2.0, netS: 0.8, netO: 0.1 },         // 8 tecnologie
+    { ang: 0.0, y: 3.2, dist: 12, tx: 0, ty: 1.9, work: 0, armO: 0.1, armX: 8.2, armS: 0.6, armRY: 0.3, netX: -0.6, netY: 2.3, netS: 1.5, netO: 0.6 },   // 9 un solo partner
+    { ang: 0.4, y: 2.9, dist: 11.5, tx: 0.4, ty: 1.9, work: 0, armO: 0.22, armX: 6.4, armS: 0.62, armRY: -0.4, netX: -9, netY: 2.0, netS: 0.8, netO: 0.1 },   // 10 applicazioni robotica
   ];
   const keyed = [...document.querySelectorAll('[data-key]')].map((el) => ({ el, k: Number(el.dataset.key) }));
   const cur = { ...K[0] };
@@ -262,6 +265,7 @@
     camera.position.set(cur.tx + Math.sin(cur.ang) * d + mouse.sx * 0.5, cur.y * (narrow ? 1.1 : 1) - mouse.sy * 0.3, Math.cos(cur.ang) * d);
     camera.lookAt(cur.tx * (narrow ? 0.3 : 1), cur.ty + (narrow ? 2.1 : 0), 0);
 
+    arm.visible = cur.armO > 0.02;
     for (const m of armMats) m.opacity = m.userData.base * cur.armO;
     arm.position.set(cur.armX * (narrow ? 0.15 : 1), 0, 0);
     arm.scale.setScalar(Math.max(0.001, cur.armS * intro * (narrow ? 0.8 : 1)));
@@ -320,7 +324,14 @@
   }
 
   document.addEventListener('visibilitychange', () => { if (!document.hidden && !reduce) { cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); } });
-  if (reduce) { window.addEventListener('scroll', () => requestAnimationFrame(frame), { passive: true }); }
+  window.addEventListener('scroll', () => { if (reduce) requestAnimationFrame(frame); }, { passive: true });
+  // Il pulsante "Riduci animazioni" ferma o riavvia la scena senza ricaricare la pagina
+  window.addEventListener('ldmotion', () => {
+    const was = reduce; reduce = isCalm();
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(frame);
+    if (!was && reduce) { wt = 0; lastCycle = -1; clearCrates(); }
+  });
   document.body.classList.add('has-3d');
   frame();
   }

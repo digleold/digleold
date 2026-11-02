@@ -1,4 +1,6 @@
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+const isCalm = () => motionQuery.matches || document.documentElement.dataset.motion === 'calm';
+const reduceMotion = isCalm();
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 // Menu mobile
@@ -82,6 +84,7 @@ if (finePointer && !reduceMotion) {
   document.querySelectorAll('.tilt').forEach((el) => {
     const max = Number(el.dataset.tilt) || 9;
     el.addEventListener('pointermove', (e) => {
+      if (isCalm()) return;
       const r = el.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
       el.classList.add('live');
@@ -241,6 +244,7 @@ if (dlg && typeof dlg.showModal === 'function') {
 
   let lastY = window.scrollY, vel = 0, lastT = performance.now(), raf = 0, visible = false;
   const tick = (now) => {
+    if (isCalm()) { st.forEach((s) => { s.track.style.transform = ''; }); raf = 0; return; }
     const dt = clampN((now - lastT) / 1000, 0.001, 0.05); lastT = now;
     const y = window.scrollY, raw = (y - lastY) / dt; lastY = y;
     vel += (raw - vel) * Math.min(1, dt * 9);                 // molla smorzata sulla velocita' di scroll
@@ -254,30 +258,32 @@ if (dlg && typeof dlg.showModal === 'function') {
     });
     raf = visible ? requestAnimationFrame(tick) : 0;
   };
+  window.addEventListener('ldmotion', () => { if (!isCalm() && visible && !raf) { lastT = performance.now(); lastY = window.scrollY; raf = requestAnimationFrame(tick); } });
   if ('IntersectionObserver' in window) {
     new IntersectionObserver((e) => { visible = e[0].isIntersecting; if (visible && !raf) { lastT = performance.now(); lastY = window.scrollY; raf = requestAnimationFrame(tick); } }, { rootMargin: '150px 0px' }).observe(rows[0].parentElement);
   }
 })();
 
-// ===== Luce che segue il cursore e pulsanti "magnetici" (solo con mouse) =====
+// ===== Luce morbida che segue il cursore (solo con mouse) =====
 if (finePointer && !reduceMotion) {
   const glow = document.createElement('div'); glow.className = 'cursor-glow'; glow.setAttribute('aria-hidden', 'true'); document.body.appendChild(glow);
   let gx = 0, gy = 0, tx = 0, ty = 0, gr = 0;
   const loop = () => { gx += (tx - gx) * 0.12; gy += (ty - gy) * 0.12; glow.style.transform = `translate3d(${gx}px,${gy}px,0)`; gr = Math.abs(tx - gx) + Math.abs(ty - gy) > 0.5 ? requestAnimationFrame(loop) : 0; };
-  const mags = [...document.querySelectorAll('.btn')];
-  let pend = false, px = 0, py = 0;
-  window.addEventListener('pointermove', (e) => {
-    tx = e.clientX; ty = e.clientY; glow.classList.add('on'); if (!gr) gr = requestAnimationFrame(loop);
-    px = e.clientX; py = e.clientY;
-    if (pend) return; pend = true;
-    requestAnimationFrame(() => {
-      pend = false;
-      mags.forEach((b) => {
-        const r = b.getBoundingClientRect(); if (!r.width || r.bottom < -80 || r.top > window.innerHeight + 80) return;
-        const cx = r.left + r.width / 2, cy = r.top + r.height / 2, dx = px - cx, dy = py - cy, R = Math.max(r.width, r.height) / 2 + 56;
-        if (Math.hypot(dx, dy) < R) b.style.translate = `${(dx * 0.22).toFixed(1)}px ${(dy * 0.3).toFixed(1)}px`; else if (b.style.translate) b.style.translate = '';
-      });
-    });
-  }, { passive: true });
+  window.addEventListener('pointermove', (e) => { tx = e.clientX; ty = e.clientY; glow.classList.add('on'); if (!gr) gr = requestAnimationFrame(loop); }, { passive: true });
   document.addEventListener('pointerleave', () => glow.classList.remove('on'));
 }
+
+// ===== Controllo manuale delle animazioni (accessibilita'): il pulsante nel footer ferma i movimenti decorativi =====
+(function () {
+  const btn = document.querySelector('.motion-toggle');
+  if (!btn) return;
+  const html = document.documentElement;
+  const apply = (calm, save) => {
+    if (calm) html.dataset.motion = 'calm'; else delete html.dataset.motion;
+    btn.setAttribute('aria-pressed', String(calm));
+    if (save) { try { localStorage.setItem('ld-motion', calm ? 'calm' : 'full'); } catch (e) { /* preferenza non salvata */ } }
+    window.dispatchEvent(new Event('ldmotion'));
+  };
+  btn.setAttribute('aria-pressed', String(html.dataset.motion === 'calm'));
+  btn.addEventListener('click', () => apply(html.dataset.motion !== 'calm', true));
+})();

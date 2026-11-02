@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <script>document.documentElement.classList.add('js')</script>
+  <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('ld-motion')==='calm')document.documentElement.dataset.motion='calm'}catch(e){}</script>
   <meta name="description" content="Software su misura, servizi IT, cloud, sicurezza e cobot per PMI e industria. LD Technologies SRL, Gravina in Puglia (BA). Prenota una consulenza gratuita.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.ldtechnologies.it/">
@@ -354,6 +354,7 @@
         <a href="#robotica">Robotica</a>
         <a href="#progetti">Progetti</a>
         <a href="#partner">Partner</a>
+        <a class="nav-phone" href="tel:+390808493561" aria-label="Chiama 080 849 3561"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg><span>080 849 3561</span></a>
         <a href="#contatti" class="btn btn-primary">Contatti</a>
       </nav>
     </div>
@@ -374,6 +375,22 @@
         </div>
       </div>
       <div class="scroll-cue" aria-hidden="true"><i></i>Scorri</div>
+    </section>
+
+    <section class="proof" aria-label="Aziende che hanno scelto LD">
+      <div class="container proof-inner">
+        <p class="proof-label">Hanno scelto LD</p>
+        <ul class="proof-logos">
+          <li><img decoding="async" width="180" height="71" src="img/cl-faver.webp" alt="FAVER" loading="lazy"></li>
+          <li><img decoding="async" width="500" height="245" src="img/cl-basepizza.webp" alt="Base Pizza" loading="lazy"></li>
+          <li><img decoding="async" width="199" height="48" src="img/cl-grimaldi.webp" alt="Grimaldi Immobiliare" loading="lazy"></li>
+          <li><img decoding="async" width="300" height="300" src="img/cl-lofrese.webp" alt="Lofrese" loading="lazy"></li>
+          <li><img decoding="async" width="240" height="155" src="img/cl-lucente.webp" alt="La Lucente" loading="lazy"></li>
+          <li><img decoding="async" width="500" height="277" src="img/cl-rai.webp" alt="RAI Ricambi" loading="lazy"></li>
+          <li><img decoding="async" width="225" height="225" src="img/cl-sialia.webp" alt="Sialia" loading="lazy"></li>
+          <li><img decoding="async" width="495" height="400" src="img/cl-wework.webp" alt="We Work" loading="lazy"></li>
+        </ul>
+      </div>
     </section>
 
     <section class="section" id="chi-siamo" aria-labelledby="chi-siamo-titolo" data-key="1">
@@ -465,7 +482,7 @@
             <p>Secondo lo studio riportato dal Financial Times in &ldquo;Meet the cobot: humans and robots together on the factory floor&rdquo;, la collaborazione aumenta la produttivit&agrave; rispetto all&rsquo;uso separato di persone e robot.</p>
           </div>
         </div>
-        <div class="grid g3">
+        <div class="grid g3" data-key="10">
           <article class="card glass tilt reveal y" data-tilt="9"><span class="icon pop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg></span><h3 class="pop">Finitura</h3><p class="pop">Lucidatura e levigatura con un tocco specifico e delicato.</p></article>
           <article class="card glass tilt reveal y" data-tilt="9"><span class="icon pop"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></span><h3 class="pop">Asservimento macchine</h3><p class="pop">Gestisci le macchine e libera i dipendenti per compiti pi&ugrave; preziosi.</p></article>
           <article class="card glass tilt reveal y" data-tilt="9"><span class="icon pop"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></span><h3 class="pop">Controllo qualit&agrave;</h3><p class="pop">I bracci robotici collaborativi offrono precisione e coerenza.</p></article>
@@ -522,7 +539,7 @@
       <div class="container">
         <div class="head reveal">
           <span class="eyebrow">Progetti realizzati</span>
-          <h2 id="progetti-titolo">Dal gestionale al cobot: lavori veri, per aziende vere.</h2>
+          <h2 id="progetti-titolo">Dal gestionale al cobot: i progetti che abbiamo realizzato.</h2>
           <p>Le aziende più virtuose del territorio hanno scelto di rivolgersi a noi per l&rsquo;utilità dei servizi offerti e per le competenze mostrate negli anni. Apri una scheda per vedere cosa abbiamo fatto.</p>
         </div>
         <div class="filters reveal" role="group" aria-label="Filtra i progetti">
@@ -581,7 +598,7 @@
       <div class="container">
         <div class="head reveal" style="text-align:center;margin-inline:auto">
           <span class="eyebrow">Partner tecnologici</span>
-          <h2 id="partner-titolo">Collaboriamo con i migliori produttori, dal 2015.</h2>
+          <h2 id="partner-titolo">I produttori con cui collaboriamo, dal 2015.</h2>
           <p>Selezioniamo e integriamo la tecnologia giusta per il tuo processo: soluzioni pronte all&rsquo;uso oppure progetti custom che si integrano nel flusso operativo gi&agrave; presente in azienda.</p>
         </div>
         <div class="ring-stage reveal">
@@ -617,7 +634,7 @@
       <div class="container">
         <div class="head reveal">
           <span class="eyebrow">Domande frequenti</span>
-          <h2 id="faq-titolo">Quello che ci chiedono di più.</h2>
+          <h2 id="faq-titolo">Le risposte alle domande più comuni.</h2>
         </div>
         <div class="faq reveal">
           <details class="glass" open><summary>Quali servizi informatici offre LD Technologies SRL?</summary><p>Gestione IT completa (hardware, software e funzioni di rete), progettazione di infrastrutture di rete, sicurezza informatica, virtualizzazione, software personalizzati, siti web ed e-commerce, cloud computing, oltre ad automazione e robotica collaborativa.</p></details>
@@ -641,27 +658,27 @@
         </div>
         <div class="contact-grid">
           <form id="contact-form" class="card glass tilt reveal" data-tilt="2" novalidate>
-            <label for="f-nome">Nome e cognome <input id="f-nome" name="nome" required autocomplete="name"></label>
-            <label for="f-email">Email <input id="f-email" name="email" type="email" required autocomplete="email"></label>
+            <label for="f-nome"><span>Nome e cognome <span class="req" aria-hidden="true">*</span></span> <input id="f-nome" name="nome" required autocomplete="name"></label>
+            <label for="f-email"><span>Email <span class="req" aria-hidden="true">*</span></span> <input id="f-email" name="email" type="email" required autocomplete="email"></label>
             <label for="f-arg">Di cosa hai bisogno?
               <select id="f-arg" name="argomento">
                 <option value="info@ldtechnologies.it">Software, reti, cloud e servizi IT</option>
                 <option value="info@ldrobotics.it">Robotica e automazione</option>
               </select>
             </label>
-            <label for="f-msg">Messaggio <textarea id="f-msg" name="messaggio" required></textarea></label>
+            <label for="f-msg"><span>Messaggio <span class="req" aria-hidden="true">*</span></span> <textarea id="f-msg" name="messaggio" required></textarea></label>
             <button class="btn btn-primary" type="submit">Invia messaggio</button>
-            <small class="muted">Si aprir&agrave; il tuo programma di posta con il messaggio gi&agrave; compilato.</small>
+            <small class="muted">* Campi obbligatori. Si aprir&agrave; il tuo programma di posta con il messaggio gi&agrave; compilato; se non si apre, scrivi a info@ldtechnologies.it.</small>
           </form>
-          <div class="card glass tilt reveal" data-tilt="4">
+          <div class="card contact-card glass tilt reveal" data-tilt="4">
             <h3>LD Technologies SRL</h3>
-            <address>Via Enrico Fermi snc<br>70024 Gravina in Puglia (BA)<br>P.IVA 08921740729</address>
-            <h3>Telefono</h3>
-            <p><a class="link" href="tel:+390808493561">080 849 3561</a></p>
-            <h3>Email</h3>
-            <p><a class="link" href="mailto:info@ldtechnologies.it">info@ldtechnologies.it</a><br><a class="link" href="mailto:info@ldrobotics.it">info@ldrobotics.it</a></p>
-            <h3>Social</h3>
-            <p><a class="link" href="https://www.facebook.com/profile.php?id=100095597971748" target="_blank" rel="noopener noreferrer" aria-label="Facebook (si apre in una nuova scheda)">Facebook</a></p>
+            <dl>
+              <div><dt>Sede</dt><dd><address>Via Enrico Fermi snc<br>70024 Gravina in Puglia (BA)</address></dd></div>
+              <div><dt>Partita IVA</dt><dd>08921740729</dd></div>
+              <div><dt>Telefono</dt><dd><a class="link" href="tel:+390808493561">080 849 3561</a></dd></div>
+              <div><dt>Email</dt><dd><a class="link" href="mailto:info@ldtechnologies.it">info@ldtechnologies.it</a><br><a class="link" href="mailto:info@ldrobotics.it">info@ldrobotics.it</a></dd></div>
+              <div><dt>Social</dt><dd><a class="link" href="https://www.facebook.com/profile.php?id=100095597971748" target="_blank" rel="noopener noreferrer" aria-label="Facebook (si apre in una nuova scheda)">Facebook</a></dd></div>
+            </dl>
           </div>
         </div>
       </div>
@@ -669,17 +686,41 @@
 
   </main>
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <span>&copy; <span data-year></span> LD Technologies SRL &mdash; Via Enrico Fermi snc, 70024 Gravina in Puglia (BA) &mdash; P.IVA 08921740729</span>
-      <nav aria-label="Footer">
-        <a href="#servizi">Servizi IT</a>
-        <a href="#robotica">Robotica</a>
-        <a href="#progetti">Progetti</a>
-        <a href="#partner">Partner</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contatti">Contatti</a>
-        <a href="tel:+390808493561">080 849 3561</a>
-      </nav>
+    <div class="container">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a class="brand" href="#home" aria-label="LD Technologies SRL - inizio pagina"><span class="mark"><img decoding="async" width="201" height="245" src="img/logo-ld-technologies.png" alt="" loading="lazy"></span><span>LD Technologies <small>SRL</small></span></a>
+          <p>Servizi informatici, software su misura e robotica collaborativa per PMI e industria.</p>
+          <address>Via Enrico Fermi snc, 70024 Gravina in Puglia (BA)<br>P.IVA 08921740729</address>
+        </div>
+        <nav aria-label="Sezioni del sito">
+          <p class="foot-title">Il sito</p>
+          <ul class="foot-list">
+            <li><a href="#servizi">Servizi IT</a></li>
+            <li><a href="#robotica">Robotica</a></li>
+            <li><a href="#metodo">Metodo</a></li>
+            <li><a href="#progetti">Progetti</a></li>
+            <li><a href="#partner">Partner</a></li>
+            <li><a href="#faq">Domande frequenti</a></li>
+          </ul>
+        </nav>
+        <div>
+          <p class="foot-title">Contatti</p>
+          <ul class="foot-list">
+            <li><a href="tel:+390808493561">080 849 3561</a></li>
+            <li><a href="mailto:info@ldtechnologies.it">info@ldtechnologies.it</a></li>
+            <li><a href="mailto:info@ldrobotics.it">info@ldrobotics.it</a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=100095597971748" target="_blank" rel="noopener noreferrer" aria-label="Facebook (si apre in una nuova scheda)">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>&copy; <span data-year></span> LD Technologies SRL. Tutti i diritti riservati.</span>
+        <div class="foot-actions">
+          <button type="button" class="motion-toggle" aria-pressed="false">Riduci animazioni</button>
+          <a href="#home">Torna su &uarr;</a>
+        </div>
+      </div>
     </div>
   </footer>
   <dialog id="dlg" class="dlg" aria-label="Dettaglio">
