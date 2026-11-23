@@ -37,6 +37,13 @@ Poi apri http://localhost:8000 (italiano) o http://localhost:8000/en/ (inglese).
 - **Barra di avanzamento** con una cassa che scorre sul binario.
 - Il 3D parte solo se il dispositivo supporta WebGL; altrimenti resta la foto e non si scarica Three.js.
 
+## Logo
+
+Il logo aziendale originale (simbolo blu notte e menta, scritta e slogan) e' in `img/logo-ld-technologies.png`. Da esso derivano:
+`img/logo-full.webp` e `img/logo-mark.webp` (per fondi chiari), `img/logo-full-light.webp` e `img/logo-mark-light.webp` (per fondi scuri: il blu notte diventa bianco, il menta resta),
+le icone (`favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`) e `img/og-image.jpg` (anteprima social).
+In testata il simbolo cambia versione da solo quando la testata passa sui fondi scuri; nel footer c'e' il logo completo con slogan.
+
 ## Lingue
 
 Due URL separati, ciascuno con titolo, descrizione, Open Graph, dati strutturati (JSON-LD) e FAQ nella propria lingua; `hreflang` it/en/x-default,

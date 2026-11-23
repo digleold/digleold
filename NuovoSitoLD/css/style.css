@@ -80,7 +80,11 @@ html.lenis, html.lenis body { height: auto; }
 .site-header { position: fixed; inset: 0 0 auto 0; z-index: 60; color: var(--ink); pointer-events: none; transition: color .3s; }
 .site-header.on-dark:not(.menu-open) { color: #fff; }
 .bar { display: flex; align-items: center; justify-content: space-between; height: var(--nav-h); padding-inline: var(--gutter); pointer-events: auto; }
-.logo { font-weight: 700; font-size: 1.08rem; letter-spacing: -.035em; min-height: 44px; display: inline-flex; align-items: center; }
+.logo { font-weight: 700; font-size: 1.08rem; letter-spacing: -.035em; min-height: 44px; display: inline-flex; align-items: center; gap: .55rem; }
+.logo .lm { height: 30px; width: auto; flex: none; }
+.logo .lm-light { display: none; }
+.site-header.on-dark:not(.menu-open) .lm-dark { display: none; }
+.site-header.on-dark:not(.menu-open) .lm-light { display: block; }
 .logo sup { font-size: .5em; margin-left: 2px; align-self: flex-start; margin-top: .85em; font-weight: 500; }
 .nav { display: flex; align-items: center; gap: clamp(18px, 2.2vw, 36px); }
 .nav a:not(.btn) { font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; min-height: 44px; display: inline-flex; align-items: center; transition: opacity .25s; }
@@ -283,6 +287,7 @@ textarea { min-height: 9rem; resize: vertical; }
 .foot-cols a { display: block; font-size: 1.15rem; letter-spacing: -.02em; line-height: 1.5; min-height: 32px; transition: opacity .25s; }
 .foot-cols a:hover { opacity: .6; }
 .foot-cols address { color: #b9bad6; font-size: 1.05rem; line-height: 1.5; }
+.foot-logo { width: clamp(150px, 13vw, 210px); height: auto; margin-bottom: 1.6rem; }
 .foot-note { margin-top: 1.4rem; color: #9a9bc4; font-size: .85rem; max-width: 22rem; }
 .foot-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: clamp(2.4rem, 5vw, 4.5rem); }
 .foot-card { position: relative; background: var(--dark-2); border-radius: 12px; min-height: 7.5rem; padding: 1rem 1.1rem; display: flex; flex-direction: column; justify-content: space-between; transition: background .3s; }
