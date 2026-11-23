@@ -207,6 +207,12 @@
     if (video) video.pause();
     fab.focus({ preventScroll: true });
   }
+  // avatar animato nel pulsante: piccolo ciclo muto, parte dopo il caricamento e solo se il movimento e' consentito
+  const idle = $('.asst-idle', fab);
+  if (idle && !isCalm()) {
+    const go = () => { idle.preload = 'auto'; idle.play().then(() => idle.classList.add('on')).catch(() => {}); };
+    if (document.readyState === 'complete') setTimeout(go, 1200); else addEventListener('load', () => setTimeout(go, 1200), { once: true });
+  }
   fab.addEventListener('click', openPanel);
   hello.addEventListener('click', openPanel);
   closeBtn.addEventListener('click', close);
