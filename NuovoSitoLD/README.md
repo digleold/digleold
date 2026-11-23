@@ -79,3 +79,11 @@ Testi, loghi e contatti provengono da ldtechnologies.it e ldrobotics.it; le sezi
 non sono state riportate. Le foto `img/partner-*` provengono da ldrobotics.it e sono dei rispettivi produttori
 (Universal Robots, Dobot, MiR, Microsoft, Robotiq, JAKA, ABB).
 Il modulo contatti apre il programma di posta (`mailto:`); per un invio diretto va collegato a un servizio di form.
+
+## Assistente virtuale (presentatrice + chat)
+
+- Widget in basso a destra (`#asst`, `js/assistant.js`, stili in fondo a `css/style.css`).
+- Saluto video IT/EN con presentatrice virtuale (generata con Synthesia, dichiarata come IA): `video/assistant-it.mp4`, `video/assistant-en.mp4`, poster in `img/assistant-poster-*.webp`. Il video si carica solo all'apertura della chat.
+- Risposte: in "modalità base" il widget cerca nei contenuti della pagina; con `<meta name="ld-assistant-endpoint">` valorizzato usa la funzione IA in `../assistant-api/` (vedi il suo README: serve una API key Anthropic e un hosting serverless).
+- La base di conoscenza si rigenera con `python3 tools/build_kb.py`.
+- Privacy: con endpoint attivo le domande vengono inviate a un fornitore terzo → aggiornare l'informativa.

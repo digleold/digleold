@@ -1,0 +1,492 @@
+{
+ "lang": "it",
+ "site_title": "LD Technologies SRL | Software, IT e robotica collaborativa",
+ "faq": [
+  {
+   "q": "Quali servizi informatici offre LD Technologies SRL?",
+   "a": "Gestione IT completa (hardware, software e funzioni di rete), progettazione di infrastrutture di rete, sicurezza informatica, virtualizzazione, software personalizzati, siti web ed e-commerce, cloud computing, oltre ad automazione e robotica collaborativa."
+  },
+  {
+   "q": "Perché adottare un robot collaborativo?",
+   "a": "I cobot sono progettati per lavorare in sicurezza a stretto contatto con le persone, riducendo il rischio di lesioni o danni. Possono lavorare in modo autonomo o insieme ai lavoratori, aumentando la produttività e riducendo i tempi di fermo, e si adattano rapidamente alle esigenze del lavoro con cambio di attrezzatura e riprogrammazione semplici. Secondo lo studio riportato dal Financial Times, la collaborazione tra robot e persone è l’85% più produttiva."
+  },
+  {
+   "q": "In quali ambiti e settori si applica la robotica collaborativa?",
+   "a": "Finitura, asservimento macchine, controllo qualità, assemblaggio, pallettizzazione e saldatura. I settori serviti includono alimentare, automazione industriale, metalmeccanico, mobiliare, plastica e polimeri e tecnologico."
+  },
+  {
+   "q": "Come si svolge un progetto software su misura?",
+   "a": "In tre fasi: analisi delle esigenze e dei processi da migliorare, progettazione di un’architettura flessibile e scalabile, sviluppo sotto rigido controllo con collaudo e rilascio. Il Cliente è sempre aggiornato sulle fasi di sviluppo e può richiedere modifiche in corso d’opera."
+  },
+  {
+   "q": "Con quali tecnologie sviluppate il software?",
+   "a": "Applicazioni web con ASP.NET, PHP, HTML e JavaScript; database MySQL, SQL Server e Firebird; applicazioni desktop in C/C++, C#, VB e Java. La tecnologia migliore viene scelta in fase di progettazione in base alle esigenze del Cliente."
+  },
+  {
+   "q": "Con quali produttori di robot collaborate?",
+   "a": "Collaboriamo con Universal Robots (UR10e), Dobot (M1 Pro), MiR (MiR 1350), Microsoft (HoloLens 2, Mixed Reality), JAKA Robotics, Robotiq e ABB."
+  },
+  {
+   "q": "Come posso prenotare una consulenza gratuita?",
+   "a": "Chiama il numero 080 849 3561, scrivi a info@ldtechnologies.it (servizi IT e software) o a info@ldrobotics.it (robotica e automazione), oppure compila il modulo nella sezione Contatti."
+  },
+  {
+   "q": "Dove si trova LD Technologies SRL?",
+   "a": "La sede è in Via Enrico Fermi snc, 70024 Gravina in Puglia (BA). Partita IVA 08921740729."
+  }
+ ],
+ "services": [
+  {
+   "name": "Gestione IT completa",
+   "area": "Servizi informatici",
+   "text": "Gestione di hardware, software e funzioni di rete, per PMI e Pubblica Amministrazione locale. Semplifichiamo e integriamo processi aziendali, applicazioni e sistemi informatici con le tecnologie leader di mercato."
+  },
+  {
+   "name": "Infrastruttura di rete",
+   "area": "Servizi informatici",
+   "text": "Progettiamo una rete informatica adeguata e personalizzata."
+  },
+  {
+   "name": "Sicurezza informatica",
+   "area": "Servizi informatici",
+   "text": "Valutiamo con attenzione il sistema di sicurezza della tua azienda."
+  },
+  {
+   "name": "Virtualizzazione",
+   "area": "Servizi informatici",
+   "text": "Semplifica e riduci i costi di implementazione e mantenimento dell’infrastruttura IT."
+  },
+  {
+   "name": "Software personalizzati",
+   "area": "Software",
+   "text": "La nostra attività principale è la progettazione e lo sviluppo di software applicativo per le PMI: soluzioni su misura che superano i limiti dei prodotti standard e si integrano nel sistema informativo esistente. Analisi, progettazione e sviluppo, sempre condivisi con il Cliente."
+  },
+  {
+   "name": "Siti web ed e-commerce",
+   "area": "Software",
+   "text": "Siti web moderni, veloci e performanti, ed e-commerce."
+  },
+  {
+   "name": "Cloud computing",
+   "area": "Servizi informatici",
+   "text": "Servizi di cloud computing affidabili e personalizzabili."
+  },
+  {
+   "name": "Gestione documentale",
+   "area": "Servizi informatici",
+   "text": "Servizi di gestione documentale per le imprese."
+  },
+  {
+   "name": "Finitura",
+   "area": "Robotica",
+   "text": "Lucidatura e levigatura con un tocco specifico e delicato."
+  },
+  {
+   "name": "Asservimento macchine",
+   "area": "Robotica",
+   "text": "Gestisci le macchine e libera i dipendenti per compiti più preziosi."
+  },
+  {
+   "name": "Controllo qualità",
+   "area": "Robotica",
+   "text": "I bracci robotici collaborativi offrono precisione e coerenza."
+  },
+  {
+   "name": "Assemblaggio",
+   "area": "Robotica",
+   "text": "Processi di assemblaggio ripetibili e accurati."
+  },
+  {
+   "name": "Pallettizzazione",
+   "area": "Robotica",
+   "text": "Con i cobot meno rischio di lesioni e sforzi per i dipendenti."
+  },
+  {
+   "name": "Saldatura",
+   "area": "Robotica",
+   "text": "La saldatura robotizzata garantisce maggiore precisione e uniformità."
+  }
+ ],
+ "projects": [
+  {
+   "name": "Base Pizza SRL",
+   "category": [
+    "Infrastruttura e sistemi",
+    "Software su misura"
+   ],
+   "text": [
+    "Il cliente: Produce panificati realizzati con materie prime del territorio, stesi a mano e cotti su pietra.",
+    "Per il cliente Base Pizza SRL abbiamo operato in diverse fasi:",
+    "Opera realizzata: Cablaggio rete dati cat. 6 / Gestionale / M-Files® On Site / Infrastruttura Server"
+   ],
+   "points": [
+    "Installazione di un armadio rack dedicato per Server e unità di storage, concessi a noleggio dalla nostra azienda al Cliente",
+    "Installazione e personalizzazione di software gestionale, con particolare attenzione alla tracciabilità dei lotti di prodotti alimentari",
+    "Fornitura di software M-Files CRM per le attività di marketing e promozionali",
+    "Rifacimento totale del cablaggio rete dati dell’intera palazzina: progettazione e installazione di una rete Gigabit"
+   ]
+  },
+  {
+   "name": "Officine Tecniche De Pasquale",
+   "category": [
+    "Software su misura"
+   ],
+   "text": [
+    "Il cliente: Costruzione e manutenzione di macchine e apparecchiature presso le principali raffinerie e i grandi complessi industriali nazionali.",
+    "Abbiamo contribuito a completare un software gestionale già presente in azienda, che aveva bisogno di moduli e funzioni aggiuntive per migliorare i processi aziendali. Dopo un’accurata analisi delle complesse dinamiche lavorative del Cliente, abbiamo sviluppato i moduli:"
+   ],
+   "points": [
+    "Work in Progress",
+    "Pianificazione attività di cantiere",
+    "Giornale lavori",
+    "Gestione commessa",
+    "ODC (ordine di commessa)",
+    "Registro integrazione ODC",
+    "Modulo Cost Control",
+    "Modulo fatturazione attiva"
+   ]
+  },
+  {
+   "name": "FAVER spa",
+   "category": [
+    "Software su misura",
+    "Web ed e-commerce"
+   ],
+   "text": [
+    "Il cliente: Società per Azioni che opera a Bari dal 1980: impiantistica e servizi di gestione e manutenzione in ambito energetico e facility (acqua, gas, energia, impianti per il settore ambientale).",
+    "Per il cliente FAVER abbiamo realizzato:"
+   ],
+   "points": [
+    "Il sito internet ufficiale",
+    "Il software gestionale interno",
+    "Un’applicazione mobile di monitoraggio veicoli"
+   ]
+  },
+  {
+   "name": "Poligal Service srl",
+   "category": [
+    "Software su misura"
+   ],
+   "text": [
+    "Abbiamo realizzato interamente l’algoritmo di assegnazione del personale ai vari settori di ciascun cantiere, in base a molteplici parametri:"
+   ],
+   "points": [
+    "Monte ore, riposo, malattia, ferie e permessi",
+    "Preferenze del personale",
+    "Turni anche molto complessi, comunque ulteriormente personalizzabili dall’utente"
+   ]
+  },
+  {
+   "name": "Serfin spa",
+   "category": [
+    "Infrastruttura e sistemi"
+   ],
+   "text": [
+    "Il cliente: Leader nel mercato della gestione della clientela attiva e del credito performing.",
+    "Per il cliente Serfin spa abbiamo realizzato la virtualizzazione dell’intera infrastruttura server, potenziandola con la fornitura di ulteriori apparecchiature per l’esecuzione degli applicativi e per la realizzazione e conservazione dei backup."
+   ],
+   "points": [
+    "Virtualizzazione dell’infrastruttura server",
+    "Fornitura di apparecchiature per applicativi e backup",
+    "Assistenza sistemistica costante sull’intera infrastruttura"
+   ]
+  },
+  {
+   "name": "Agenzia TRES",
+   "category": [
+    "Software su misura"
+   ],
+   "text": [
+    "Il cliente: Agenzia TRES / Agenzia Martello: partner di rappresentanze e consulenze commerciali, presente a Bari.",
+    "Abbiamo realizzato un software su misura per la creazione e gestione degli ordini ai fornitori effettuati dai clienti delle agenzie di rappresentanza."
+   ],
+   "points": [
+    "Analisi delle esigenze del cliente",
+    "Realizzazione del database",
+    "Utilizzo off-line",
+    "Gestione evoluta della scontistica: Sell in / Sell out"
+   ]
+  },
+  {
+   "name": "Grimaldi Immobiliare",
+   "category": [
+    "Software su misura"
+   ],
+   "text": [
+    "Il cliente: Agenzia presente in tutta Italia da oltre 30 anni.",
+    "Abbiamo sviluppato un software su misura per gestire le schede portafoglio che l’agenzia usa per le informazioni sugli appartamenti a catalogo.",
+    "Opera realizzata: Gestione schede portafoglio tramite software sviluppato su misura"
+   ],
+   "points": [
+    "Progettazione del database",
+    "Progettazione del layout grafico dell’applicazione"
+   ]
+  },
+  {
+   "name": "We Work s.r.l.",
+   "category": [
+    "Software su misura"
+   ],
+   "text": [
+    "Il cliente: Sicurezza, formazione, HACCP e medicina del lavoro.",
+    "Per il cliente We Work srl abbiamo realizzato:"
+   ],
+   "points": [
+    "Una soluzione software BPM",
+    "Un modulo di fatturazione"
+   ]
+  },
+  {
+   "name": "Studio Oculistico Boscia",
+   "category": [
+    "Web ed e-commerce"
+   ],
+   "text": [
+    "Il cliente: Studio oculistico con sede a Bari.",
+    "Abbiamo realizzato il sito web aziendale, occupandoci delle seguenti fasi:"
+   ],
+   "points": [
+    "Realizzazione del logo",
+    "Impostazione grafica",
+    "Sistema di prenotazione"
+   ]
+  },
+  {
+   "name": "Fashion Studio SRL",
+   "category": [
+    "Web ed e-commerce"
+   ],
+   "text": [
+    "Il cliente: Fashion Studio SRL di Vincenzo Arnone.",
+    "Per il cliente Fashion Studio abbiamo realizzato un sito web e-commerce."
+   ],
+   "points": []
+  },
+  {
+   "name": "Rivettatura collaborativa",
+   "category": [
+    "Robotica e automazione"
+   ],
+   "text": [
+    "La rivettatura collaborativa rappresenta un approccio innovativo nel settore manifatturiero, combinando competenze umane e tecnologie avanzate per ottimizzare i processi di assemblaggio."
+   ],
+   "points": [
+    "Piattaforma che integra robotica e intervento umano: precisione, efficienza e flessibilità",
+    "Condivisione di dati in tempo reale e strumenti di supporto decisionale",
+    "Meno errori e tempi di produzione ridotti",
+    "La collaborazione tra macchine e operatori come fulcro di un modello produttivo moderno, sostenibile e competitivo"
+   ]
+  },
+  {
+   "name": "Pallet station con cobot",
+   "category": [
+    "Robotica e automazione"
+   ],
+   "text": [
+    "Il progetto “Pallet Station con Cobot” ottimizza il processo di pallettizzazione integrando un robot collaborativo in grado di lavorare in sicurezza accanto agli operatori."
+   ],
+   "points": [
+    "Stazione automatizzata per il carico e la disposizione efficiente dei materiali sui pallet",
+    "Meno tempo di lavoro e minore rischio di infortuni",
+    "Programmazione intuitiva: adattabile a diversi prodotti e configurazioni",
+    "Produttività e precisione anche in spazi ridotti"
+   ]
+  },
+  {
+   "name": "Linea di formatura, riempimento e pallettizzazione scatola",
+   "category": [
+    "Robotica e automazione"
+   ],
+   "text": [
+    "Realizzazione di una linea automatizzata per la formatura, il riempimento e la pallettizzazione di scatole utilizzando più cobot."
+   ],
+   "points": [
+    "Il cobot gestisce la manipolazione dei materiali, l’assemblaggio delle scatole e la loro disposizione su pallet",
+    "Meno carico manuale e maggiore produttività complessiva",
+    "Adattamento rapido a diversi formati di scatola e configurazioni",
+    "Ideale per ambiti industriali dinamici e ad alto volume"
+   ]
+  },
+  {
+   "name": "Linea di formatura, riempimento e pallettizzazione scatola industriale",
+   "category": [
+    "Robotica e automazione"
+   ],
+   "text": [
+    "Progettazione e realizzazione di una linea automatizzata per la formatura, il riempimento e la pallettizzazione di scatole industriali."
+   ],
+   "points": [
+    "Sistemi avanzati di automazione e controllo per un’elevata efficienza produttiva",
+    "Tempi di lavorazione ridotti e sprechi ridotti al minimo",
+    "Dalla formatura precisa al riempimento fino alla disposizione ottimale sui pallet",
+    "Qualità, sicurezza e adattabilità alle diverse esigenze produttive"
+   ]
+  },
+  {
+   "name": "Etichettatura pedane",
+   "category": [
+    "Robotica e automazione"
+   ],
+   "text": [
+    "Automazione del processo di etichettatura delle pedane attraverso l’integrazione di un cobot JAKA e una stampante per etichette industriale."
+   ],
+   "points": [
+    "Il cobot è programmato per prelevare le etichette stampate e applicarle con precisione sulle pedane",
+    "Operatività rapida ed efficiente, con meno errori umani",
+    "Più produttività e flusso di lavoro ottimizzato nella logistica",
+    "Si adatta facilmente a diverse esigenze produttive"
+   ]
+  }
+ ],
+ "partners": [
+  {
+   "name": "Universal Robots",
+   "category": [
+    "Cobot a 6 assi"
+   ],
+   "text": [
+    "L’UR10e è un robot industriale collaborativo straordinariamente versatile, in grado di offrire sia un elevato carico utile di sollevamento sia un ampio raggio d’azione, il che lo rende adatto a un’ampia gamma di applicazioni. È offerto anche come sistema robotico OEM e con un Teach Pendant abilitante a 3 posizioni.",
+    "Caratteristiche",
+    "Applicazioni"
+   ],
+   "points": [
+    "Carico utile 12,5 kg",
+    "Raggio d’azione 1300 mm",
+    "Sicurezza certificata ISO 10218-1",
+    "Alta ripetibilità",
+    "Plug & Play"
+   ]
+  },
+  {
+   "name": "Dobot",
+   "category": [
+    "Cobot a 4 assi"
+   ],
+   "text": [
+    "L’M1 Pro eredita e migliora le capacità dell’M1 e integra le piattaforme software e hardware all’avanguardia di Dobot, rendendolo ideale per le esigenze di produzione dell’industria leggera: può eseguire attività ancora più complicate.",
+    "Caratteristiche",
+    "Applicazioni"
+   ],
+   "points": [
+    "4 assi",
+    "Alta ripetibilità",
+    "Dimensioni ridotte",
+    "Plug & Play"
+   ]
+  },
+  {
+   "name": "MiR",
+   "category": [
+    "Robot mobile collaborativo"
+   ],
+   "text": [
+    "MiR 1350 supporta un elevato carico utile che consente il trasporto di pallet e merci pesanti. Il design robusto garantisce lunga durata e facile manutenzione. Naviga in modo fluido ed efficiente in ambienti dinamici ed è progettato sulla base degli attuali standard di sicurezza, migliorando la capacità di resistere a polvere e fluidi.",
+    "Caratteristiche",
+    "Applicazioni"
+   ],
+   "points": [
+    "Sicurezza ISO 3691-4",
+    "Protezione IP52",
+    "Massima velocità",
+    "Carico utile elevato"
+   ]
+  },
+  {
+   "name": "Microsoft",
+   "category": [
+    "Realtà mista"
+   ],
+   "text": [
+    "HoloLens 2 permette di mantenere la concentrazione più a lungo e con il massimo comfort, senza guardare lo schermo e usando liberamente le mani, per completare le attività in tutta sicurezza e senza errori. Entra in contatto con i colleghi da remoto, collaborando attraverso ologrammi, per risolvere i problemi in tempo reale.",
+    "Caratteristiche",
+    "Applicazioni"
+   ],
+   "points": [
+    "Microsoft Partner: Mixed Reality",
+    "Agisci con precisione",
+    "Collabora senza limiti",
+    "Innova con sicurezza"
+   ]
+  },
+  {
+   "name": "JAKA Robotics",
+   "category": [
+    "Cobot"
+   ],
+   "text": [
+    "Cobot JAKA integrato con una stampante per etichette industriale nel nostro progetto di etichettatura pedane: preleva le etichette stampate e le applica con precisione, con meno errori umani e più produttività nella logistica.",
+    "Caratteristiche",
+    "Applicazioni"
+   ],
+   "points": [
+    "Integrazione con stampante industriale",
+    "Flessibilità di riprogrammazione"
+   ]
+  },
+  {
+   "name": "Robotiq",
+   "category": [
+    "Pinze e accessori per cobot"
+   ],
+   "text": [
+    "Partner tecnologico per l’equipaggiamento dei cobot: pinze e accessori che consentono al robot collaborativo di afferrare e manipolare i pezzi nelle applicazioni di asservimento, assemblaggio e pallettizzazione.",
+    "Caratteristiche",
+    "Applicazioni"
+   ],
+   "points": [
+    "Pinze per robot collaborativi",
+    "Accessori per l’equipaggiamento dei cobot"
+   ]
+  },
+  {
+   "name": "ABB",
+   "category": [
+    "Robotica industriale"
+   ],
+   "text": [
+    "Produttore globale di robot e soluzioni per l’automazione industriale, parte del nostro ecosistema di partner tecnologici.",
+    "Caratteristiche",
+    "Applicazioni"
+   ],
+   "points": [
+    "Robotica e automazione industriale"
+   ]
+  }
+ ],
+ "industries": [
+  "Alimentare",
+  "Automazione industriale",
+  "Metalmeccanico",
+  "Mobiliare",
+  "Plastica e polimeri",
+  "Tecnologico",
+  "Pubblica Amministrazione"
+ ],
+ "about": [
+  "LD Technologies SRL è un’azienda operante nel settore dei servizi informatici, dello sviluppo software e della gestione documentale. Offriamo prodotti e servizi innovativi, personalizzati e di elevato standard qualitativo. Lo stesso metodo lo portiamo anche nell’automazione: soluzioni custom che superano i limiti dei prodotti standard e si integrano nel flusso operativo già presente in azienda.",
+  "Non abbiamo formule segrete: gli unici ingredienti sono il lavoro ed il metodo. Ogni progetto è analizzato e verificato insieme al Cliente, che resta sempre aggiornato sulle fasi di sviluppo."
+ ],
+ "method": [
+  {
+   "step": "Analisi",
+   "text": "Studiamo problemi, necessità e processi da migliorare, condividendo i risultati con te prima di passare alla programmazione."
+  },
+  {
+   "step": "Progettazione",
+   "text": "Architettura flessibile e scalabile, interfaccia pensata per l’usabilità e scelta della tecnologia più adatta alle tue esigenze."
+  },
+  {
+   "step": "Sviluppo",
+   "text": "Realizzazione sotto rigido controllo, collaudo e rilascio di una procedura affidabile e veloce."
+  }
+ ],
+ "contact": {
+  "company": "LD Technologies SRL",
+  "address": "Via Enrico Fermi snc, 70024 Gravina in Puglia (BA)",
+  "vat": "08921740729",
+  "phone": "+39 080 849 3561",
+  "email_it_software": "info@ldtechnologies.it",
+  "email_robotics": "info@ldrobotics.it",
+  "facebook": "https://www.facebook.com/profile.php?id=100095597971748"
+ }
+}

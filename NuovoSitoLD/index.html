@@ -13,6 +13,7 @@
   <link rel="alternate" hreflang="x-default" href="https://www.ldtechnologies.it/">
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light">
+  <meta name="ld-assistant-endpoint" content="">
   <meta name="author" content="LD Technologies SRL">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
@@ -756,8 +757,37 @@
       <button type="button" class="nv dlg-next">Successivo →</button>
     </div>
   </dialog>
+  <aside class="asst" id="asst" aria-label="Assistente virtuale">
+    <button type="button" class="asst-hello" tabindex="-1" aria-hidden="true"></button>
+    <button type="button" class="asst-fab" aria-expanded="false" aria-controls="asst-panel" aria-label="Assistente virtuale: apri la chat">
+      <span class="asst-face"><img src="img/assistant-poster-it.webp" alt="" width="56" height="56"></span>
+      <span class="asst-lab">Assistente virtuale</span>
+    </button>
+    <section class="asst-panel" id="asst-panel" role="dialog" aria-label="Assistente LD" hidden>
+      <div class="asst-head">
+        <div class="asst-media" data-video="video/assistant-it.mp4" data-poster="img/assistant-poster-it.webp">
+          <img class="fallback" src="img/logo-mark-light.webp" alt="" width="181" height="242">
+          <span class="asst-badge"><i></i>Assistente virtuale · IA</span>
+        </div>
+        <div class="asst-ctl">
+          <button type="button" class="snd" hidden><svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12"/></svg><svg class="off" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l5 6M22 9l-5 6"/></svg></button>
+          <button type="button" class="rep" aria-label="Riascolta il saluto" title="Riascolta il saluto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 108-8H7"/><path d="M7 1v6H1" transform="translate(3 0)"/></svg></button>
+          <button type="button" class="cls" aria-label="Chiudi la chat" title="Chiudi la chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        </div>
+      </div>
+      <div class="asst-log" role="log" aria-live="polite" data-lenis-prevent></div>
+      <div class="asst-sugg" aria-label="Suggerimenti" data-lenis-prevent></div>
+      <form class="asst-form" autocomplete="off">
+        <label class="sr-only" for="asst-input">Domanda</label>
+        <input id="asst-input" type="text" maxlength="400" placeholder="Scrivi una domanda…" enterkeyhint="send">
+        <button type="submit" aria-label="Invia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </form>
+      <p class="asst-fine"><b>Sei in chat con un assistente virtuale basato su IA</b>, non con una persona. Le risposte possono contenere errori: per conferme chiama lo 080 849 3561. Non scrivere dati personali.</p>
+    </section>
+  </aside>
   <script src="js/vendor/lenis.min.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/robot.js" defer></script>
+  <script src="js/assistant.js" defer></script>
 </body>
 </html>
