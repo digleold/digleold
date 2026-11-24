@@ -607,3 +607,11 @@ html.dlg-open .asst { display: none; }
 html[data-motion="calm"] .ldav, html[data-motion="calm"] .ldav * { animation: none !important; transition: none !important; }
 @media (prefers-reduced-motion: reduce) { .ldav, .ldav * { animation: none !important; transition: none !important; } }
 @media (max-width: 520px) { .ldav-fig { height: min(42svh, 380px); } .ldav-bub { max-width: calc(100vw - 24px); } }
+
+.ldav-form { position: absolute; left: 0; right: 0; bottom: calc(max(14px, env(safe-area-inset-bottom)) + 70px); display: flex; flex-wrap: wrap; gap: .4rem; padding: 0 6px; z-index: 3; }
+.ldav-form[hidden] { display: none; }
+.ldav-form input { flex: 1 1 12rem; min-width: 0; height: 46px; padding: 0 1rem; border-radius: 999px; background: #fff; color: var(--ink); font: 400 .95rem var(--f); box-shadow: 0 10px 26px -10px rgba(10, 10, 10, .55), 0 0 0 1px var(--ghost); border: 0; }
+.ldav-form input:focus-visible, .ldav-bar button:focus-visible, .ldav-x:focus-visible, .ldav-form button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.ldav-form button[type="submit"] { width: 46px; height: 46px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; flex: none; cursor: pointer; }
+.ldav-form .full { flex: 1 1 100%; background: none; color: #fff; text-align: right; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; text-decoration: underline; cursor: pointer; text-shadow: 0 1px 6px rgba(10,10,10,.6); }
+@media (max-width: 520px) { .ldav-form input { font-size: 16px; } }

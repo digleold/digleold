@@ -9,11 +9,11 @@
   const html = document.documentElement, EN = A.EN;
   const T = EN ? {
     name: 'Virtual assistant', hello: 'Hello! I\'m the virtual assistant of LD Technologies. Shall we talk?', talk: 'Talk to me', write: 'Write instead', close: 'Close',
-    connecting: 'Connecting…', listen: 'I\'m listening. Ask me anything about our services.', mute: 'Mute microphone', unmute: 'Turn microphone on', stop: 'End conversation',
+    connecting: 'Connecting…', listen: 'I\'m listening. Ask me anything about our services.', ph: 'Type your question…', send: 'Send', openchat: 'Open the full chat', mute: 'Mute microphone', unmute: 'Turn microphone on', stop: 'End conversation',
     ended: 'Conversation ended. Tap the microphone to talk again.', err: 'The live avatar is not available right now. You can write to me in the chat.', ai: 'AI virtual assistant, not a real person',
   } : {
     name: 'Assistente virtuale', hello: 'Ciao! Sono l\'assistente virtuale di LD Technologies. Vuoi parlare con me?', talk: 'Parla con me', write: 'Scrivi', close: 'Chiudi',
-    connecting: 'Connessione…', listen: 'Ti ascolto. Chiedimi pure dei nostri servizi.', mute: 'Disattiva il microfono', unmute: 'Attiva il microfono', stop: 'Termina la conversazione',
+    connecting: 'Connessione…', listen: 'Ti ascolto. Chiedimi pure dei nostri servizi.', ph: 'Scrivi la tua domanda…', send: 'Invia', openchat: 'Apri la chat completa', mute: 'Disattiva il microfono', unmute: 'Attiva il microfono', stop: 'Termina la conversazione',
     ended: 'Conversazione terminata. Tocca il microfono per parlare di nuovo.', err: 'L\'avatar dal vivo non è disponibile ora. Puoi scrivermi nella chat.', ai: 'Assistente virtuale basato su IA, non una persona reale',
   };
   const src = (document.currentScript && document.currentScript.src) || '';
@@ -32,6 +32,7 @@
     '<div class="ldav-bub" role="status" aria-live="polite"><span class="t"></span><small>' + T.ai + '</small></div>' +
     '<button type="button" class="ldav-x" aria-label="' + T.close + '" title="' + T.close + '">' + ic.x + '</button>' +
     '<div class="ldav-fig"><img src="' + poster + '" alt="" width="540" height="960"><canvas hidden></canvas></div>' +
+    '<form class="ldav-form" hidden autocomplete="off"><label class="sr-only" for="ldav-in">' + T.ph + '</label><input id="ldav-in" type="text" maxlength="400" placeholder="' + T.ph + '" enterkeyhint="send"><button type="submit" aria-label="' + T.send + '" title="' + T.send + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>' +
     '<div class="ldav-bar">' +
       '<button type="button" class="kbd" aria-label="' + T.write + '" title="' + T.write + '">' + ic.kbd + '</button>' +
       '<button type="button" class="talk" aria-label="' + T.talk + '" title="' + T.talk + '">' + ic.mic + '</button>' +
@@ -43,7 +44,7 @@
   const bub = $('.ldav-bub .t'), bubBox = $('.ldav-bub'), img = $('.ldav-fig img'), cv = $('canvas'), talk = $('.talk'), end = $('.end'), kbd = $('.kbd');
   const say = (t) => { bub.textContent = t; bubBox.hidden = !t; bubBox.classList.remove('flash'); void bubBox.offsetWidth; bubBox.classList.add('flash'); };
 
-  let session = null, loading = null, muted = false, timer = 0, ss = null, ssTried = false, cutting = false, busy = false, hideT = 0;
+  let ready = false, session = null, loading = null, muted = false, timer = 0, ss = null, ssTried = false, cutting = false, busy = false, hideT = 0;
 
   // ---------- ritaglio della persona (sfondo trasparente) ----------
   const loadScript = (u) => new Promise((ok, ko) => { const s = document.createElement('script'); s.src = u; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
@@ -89,7 +90,7 @@
     talk.hidden = live; end.hidden = !live; talk.disabled = false;
   };
   const finish = (msg) => {
-    clearTimeout(timer); cutting = false;
+    clearTimeout(timer); cutting = false; ready = false; pending = '';
     const s = session; session = null;
     if (s) { try { s.stop(); } catch (e) {} }
     try { vid.srcObject = null; } catch (e) {}
@@ -108,7 +109,8 @@
       const s = new LA.LiveAvatarSession(d.sessionToken, { voiceChat: true, autoKeepAlive: true });
       session = s;
       s.on(LA.SessionEvent.SESSION_STREAM_READY, async () => {
-        s.attach(vid); vid.play().catch(() => {}); root.classList.remove('wait'); say(T.listen); await showVideo();
+        s.attach(vid); vid.play().catch(() => {}); root.classList.remove('wait'); ready = true; say(pending ? '' : T.listen); await showVideo();
+        if (pending) { const t = pending; pending = ''; try { s.message(t); } catch (e) {} }
       });
       s.on(LA.SessionEvent.SESSION_DISCONNECTED, () => { if (session === s) finish(T.ended); });
       s.on(LA.AgentEventsEnum.USER_TRANSCRIPTION, (e) => { if (e && e.text) A.add(e.text, 'me'); });
@@ -129,7 +131,17 @@
   talk.addEventListener('click', start);
   end.addEventListener('click', () => finish(T.ended));
   $('.ldav-x').addEventListener('click', () => { try { sessionStorage.setItem('ld-av-closed', '1'); } catch (e) {} hide(); });
-  kbd.addEventListener('click', () => { hide(); const f = document.querySelector('.asst-fab'); if (f) f.click(); });
+  const form = $('.ldav-form'), inp = form.querySelector('input'), full = document.createElement('button');
+  full.type = 'button'; full.className = 'full'; full.setAttribute('aria-label', T.openchat); full.title = T.openchat; full.textContent = T.openchat;
+  form.appendChild(full);
+  let pending = '';
+  const send = (t) => {
+    if (session && api.active && ready) { A.add(t, 'me'); say(T.connecting.replace('…', '…')); try { session.message(t); } catch (e) {} }
+    else { pending = t; A.add(t, 'me'); start(); }
+  };
+  kbd.addEventListener('click', () => { form.hidden = !form.hidden; kbd.setAttribute('aria-expanded', String(!form.hidden)); if (!form.hidden) setTimeout(() => inp.focus({ preventScroll: true }), 30); });
+  form.addEventListener('submit', (e) => { e.preventDefault(); const t = inp.value.replace(/\s+/g, ' ').trim().slice(0, 400); if (!t) return; inp.value = ''; send(t); });
+  full.addEventListener('click', () => { hide(); const f = document.querySelector('.asst-fab'); if (f) f.click(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !root.hidden) { try { sessionStorage.setItem('ld-av-closed', '1'); } catch (x) {} hide(); } });
   const api = window.LDLive = { active: false, say: (t) => { if (session) { try { session.message(t); } catch (e) {} } }, stop: () => finish(''), mute };
   addEventListener('pagehide', () => finish(''));
