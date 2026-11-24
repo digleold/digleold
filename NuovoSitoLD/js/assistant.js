@@ -170,6 +170,7 @@
   let busy = false;
   const ask = async (q) => {
     q = clean(q).slice(0, 400); if (!q || busy) return;
+    if (window.LDLive && window.LDLive.active) { input.value = ''; add(q, 'me'); window.LDLive.say(q); return; }
     busy = true; sendBtn.disabled = true; input.value = ''; sugg.hidden = true;
     add(q, 'me'); history.push({ role: 'user', content: q });
     const t = typing();
@@ -205,6 +206,7 @@
     if (panel.hidden) return;
     panel.hidden = true; root.classList.remove('open'); fab.setAttribute('aria-expanded', 'false');
     if (video) video.pause();
+    if (window.LDLive && window.LDLive.active) window.LDLive.stop();
     fab.focus({ preventScroll: true });
   }
   // avatar animato nel pulsante: piccolo ciclo muto, parte dopo il caricamento e solo se il movimento e' consentito
@@ -229,4 +231,5 @@
       setTimeout(() => hello.classList.remove('on'), 7000);
     }, 9000);
   }
+  window.LDAssist = { add, input, media, snd, rep, isCalm, EN, getVideo: () => video };
 })();

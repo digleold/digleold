@@ -573,3 +573,17 @@ html[data-motion="calm"] .asst-panel { animation: none; }
 html[data-motion="calm"] .asst-typing i { animation: none; opacity: .6; }
 html[data-motion="calm"] .asst-hello { transition: none; }
 html.dlg-open .asst { display: none; }
+
+/* Avatar dal vivo */
+.asst-ctl .live.cta { border-radius: 999px; width: auto; padding: 0 .85rem 0 .7rem; gap: .4rem; display: inline-flex; align-items: center; background: var(--brand-mint); color: var(--ink); font: 600 .7rem/1 var(--f); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.asst-ctl .live.on { background: #e5484d; color: #fff; }
+.asst-ctl .live svg, .asst-ctl .mic svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.asst-ctl .mic { position: relative; }
+.asst-ctl .mic.off { opacity: .6; }
+.asst-ctl .mic.off::after { content: ""; position: absolute; width: 22px; height: 2px; background: currentColor; transform: rotate(-45deg); }
+.asst-media.is-live { aspect-ratio: 3 / 4; max-height: 46svh; background: #0d1b2a; }
+.asst-live { position: absolute; inset: 0; background: #0d1b2a; }
+.asst-live video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 8%; }
+.asst-live-st { position: absolute; inset: auto 0 .9rem; text-align: center; color: #fff; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+.asst-msg.note { font-size: .78rem; color: var(--muted); }
+@media (max-width: 520px) { .asst-ctl .live.cta span { display: none; } .asst-ctl .live.cta { width: 44px; padding: 0; justify-content: center; } }
