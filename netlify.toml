@@ -1,0 +1,7 @@
+# Pubblicazione completa su Netlify: sito statico + funzioni dell'assistente
+[build]
+  publish = "NuovoSitoLD"
+  functions = "assistant-api/netlify/functions"
+
+[functions]
+  included_files = ["assistant-api/kb.it.json", "assistant-api/kb.en.json"]

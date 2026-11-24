@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const load = (n) => {
-  for (const p of [path.join(here, "../../", n), path.join(process.cwd(), n)]) {
+  for (const p of [path.join(here, "../../", n), path.join(process.cwd(), n), path.join(process.cwd(), "assistant-api", n), path.join(here, "assistant-api", n)]) {
     try { return fs.readFileSync(p, "utf8"); } catch {}
   }
   return "{}";
