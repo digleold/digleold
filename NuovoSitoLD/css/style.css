@@ -574,16 +574,36 @@ html[data-motion="calm"] .asst-typing i { animation: none; opacity: .6; }
 html[data-motion="calm"] .asst-hello { transition: none; }
 html.dlg-open .asst { display: none; }
 
-/* Avatar dal vivo */
-.asst-ctl .live.cta { border-radius: 999px; width: auto; padding: 0 .85rem 0 .7rem; gap: .4rem; display: inline-flex; align-items: center; background: var(--brand-mint); color: var(--ink); font: 600 .7rem/1 var(--f); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
-.asst-ctl .live.on { background: #e5484d; color: #fff; }
-.asst-ctl .live svg, .asst-ctl .mic svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
-.asst-ctl .mic { position: relative; }
-.asst-ctl .mic.off { opacity: .6; }
-.asst-ctl .mic.off::after { content: ""; position: absolute; width: 22px; height: 2px; background: currentColor; transform: rotate(-45deg); }
-.asst-media.is-live { aspect-ratio: 3 / 4; max-height: 46svh; background: #0d1b2a; }
-.asst-live { position: absolute; inset: 0; background: #0d1b2a; }
-.asst-live video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 8%; }
-.asst-live-st { position: absolute; inset: auto 0 .9rem; text-align: center; color: #fff; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
-.asst-msg.note { font-size: .78rem; color: var(--muted); }
-@media (max-width: 520px) { .asst-ctl .live.cta span { display: none; } .asst-ctl .live.cta { width: 44px; padding: 0; justify-content: center; } }
+/* Avatar dal vivo in sovraimpressione (persona ritagliata, senza riquadro) */
+.ld-av-on .asst { display: none; }
+.ldav { position: fixed; right: max(8px, env(safe-area-inset-right)); bottom: 0; z-index: 66; display: flex; flex-direction: column; align-items: flex-end; pointer-events: none; transform: translateY(24px); opacity: 0; transition: opacity .6s var(--ease), transform .7s var(--ease); font-family: var(--f); }
+.ldav.in { transform: none; opacity: 1; }
+.ldav[hidden] { display: none; }
+.ldav > * { pointer-events: auto; }
+.ldav-bub { position: relative; max-width: min(21rem, calc(100vw - 32px)); margin: 0 6px .6rem 0; padding: .8rem 2.6rem .7rem 1rem; background: #fff; color: var(--ink); border-radius: 16px 16px 4px 16px; font-size: .9rem; line-height: 1.45; box-shadow: 0 16px 40px -14px rgba(10, 10, 10, .45), 0 0 0 1px var(--ghost); max-height: 34svh; overflow: auto; }
+.ldav-bub small { display: block; margin-top: .35rem; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.ldav-bub.flash { animation: ldavpop .45s var(--ease); }
+@keyframes ldavpop { from { transform: translateY(6px) scale(.97); opacity: .4; } to { transform: none; opacity: 1; } }
+.ldav-x { position: absolute; top: 6px; right: 12px; width: 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; box-shadow: 0 6px 18px -6px rgba(10, 10, 10, .5), 0 0 0 1px var(--ghost); z-index: 2; }
+.ldav-bub:not([hidden]) ~ .ldav-x { top: 6px; }
+.ldav-fig { position: relative; height: min(76svh, 760px); aspect-ratio: 9 / 16; max-width: 92vw; filter: drop-shadow(0 22px 28px rgba(10, 10, 10, .28)); }
+.ldav-fig img, .ldav-fig canvas, .ldav-raw { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; }
+.ldav-fig [hidden] { display: none; }
+.ldav-raw { object-fit: cover; -webkit-mask-image: radial-gradient(ellipse 70% 62% at 50% 46%, #000 60%, transparent 100%); mask-image: radial-gradient(ellipse 70% 62% at 50% 46%, #000 60%, transparent 100%); }
+.ldav.wait .ldav-fig img { animation: ldavwait 1.4s ease-in-out infinite; }
+@keyframes ldavwait { 50% { opacity: .55; } }
+.ldav-src { position: fixed; width: 2px; height: 2px; opacity: .01; pointer-events: none; left: 0; top: 0; }
+.ldav-bar { position: absolute; left: 0; right: 0; bottom: max(14px, env(safe-area-inset-bottom)); display: flex; justify-content: center; align-items: center; gap: .6rem; }
+.ldav-bar button, .ldav-x { cursor: pointer; }
+.ldav-bar button { width: 48px; height: 48px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; box-shadow: 0 10px 26px -10px rgba(10, 10, 10, .55), 0 0 0 1px var(--ghost); transition: transform .25s var(--ease); }
+.ldav-bar button:hover { transform: translateY(-2px); }
+.ldav-bar button[hidden] { display: none; }
+.ldav-bar .talk { width: 60px; height: 60px; background: var(--brand-mint); }
+.ldav-bar .end.muted { background: #e5484d; color: #fff; }
+.ldav svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ldav-x svg { width: 16px; height: 16px; }
+.ldav-bar .talk:not([hidden]) { animation: ldavring 2.4s ease-out infinite; }
+@keyframes ldavring { 0% { box-shadow: 0 0 0 0 rgba(78, 230, 168, .55), 0 10px 26px -10px rgba(10, 10, 10, .55); } 70%, 100% { box-shadow: 0 0 0 16px rgba(78, 230, 168, 0), 0 10px 26px -10px rgba(10, 10, 10, .55); } }
+html[data-motion="calm"] .ldav, html[data-motion="calm"] .ldav * { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) { .ldav, .ldav * { animation: none !important; transition: none !important; } }
+@media (max-width: 520px) { .ldav-fig { height: min(42svh, 380px); } .ldav-bub { max-width: calc(100vw - 24px); } }
